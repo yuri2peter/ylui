@@ -1,0 +1,162 @@
+#_box_time *{
+    margin: 0;
+    padding: 0;
+}
+#_box_time li{
+    list-style: none;
+}
+#_box_time .clearfix:after{
+    content: '';
+    visibility: hidden;
+    display: block;
+    clear: both;
+}
+#_box_time{
+    color: #fff;
+    position: absolute;
+    bottom:2rem;
+    right: 0;
+    height: 25rem;
+    width:294px;
+}
+#_box_time ._h_m_s{
+    margin-top: 0.6rem;
+    height: 3.4rem;
+    font-size: 1.7rem;
+    line-height: 3.4rem;
+    text-indent: 1.2rem;
+}
+#_box_time ._y_m_d{
+    color: rgba(255, 255, 255, 0.50);
+    width: 8.5rem;
+    min-width: 12em;
+    margin-left: 0.8rem;
+    text-indent: 0.4rem;
+    font-size: 0.7rem;
+    height:1.5rem;
+    line-height: 1.5rem;
+    margin-bottom: 0.35rem;
+    text-align: left;
+}
+#_box_time ._y_m_d:hover{
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.72);
+}
+#_box_time .calendar {
+    height: 16.35rem;
+}
+#_box_time .calendar ._header{
+    height: 1.9rem;
+    line-height: 1.9rem;
+    font-size: 0.9rem;
+    color: #fff;
+    opacity: 0.8;
+    text-indent: 0.3rem;
+    position: relative;
+}
+#_box_time .calendar ._header strong{
+    padding-left: 0.9rem;
+    height: 1.9rem;
+    display: block;
+    width: 6.5rem;
+    font-weight: normal;
+    cursor: pointer;
+}
+#_box_time .calendar ._header strong:hover{
+    text-shadow: 0 0 3px #fff;
+}
+#_box_time .calendar ._header span{
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    top:0;
+    right: 0;
+    height: 1.9rem;
+    text-indent: 0.65rem;
+    display: inline-block;
+    writing-mode: vertical-lr;
+    -webkit-writing-mode: vertical-lr;
+    font-weight: bold;
+}
+#_box_time .calendar ._header span:hover{
+    text-shadow: 0 0 3px #fff;
+}
+#_box_time .calendar ._header .aL{
+    right: 58px;
+}
+#_box_time .calendar ._header .aR{
+    right: 18px;
+}
+#_box_time .calendar ._week {
+    padding: 0 0.6rem 0;
+}
+#_box_time .calendar ._week span{
+    display: block;
+    width: 2.4rem;
+    font-size: 0.55rem;
+    height: 1.85rem;
+    float: left;
+    line-height: 1.85rem;
+    text-align: center;
+}
+#_box_time .calendar ._days {
+    height: 12.5rem;
+    overflow: hidden;
+    margin: 0 0.6rem 0;
+    position: relative;
+}
+#_box_time .calendar ._days ul{
+    position: absolute;
+    top:-12.6rem;
+    left: 0;
+}
+#_box_time .calendar ._days li{
+    /*font-family: arial;*/
+    font-size: 0.9rem;
+    display: block;
+    width: 2.3rem;
+    height: 2rem;
+    float: left;
+    line-height: 2rem;
+    text-align: center;
+    margin: 0.05rem;
+}
+#_box_time ._normal{
+    /*display: none;*/
+}
+#_box_time .grey {  color: rgba(236, 247, 255, 0.36);  }
+#_box_time .active {
+    box-shadow: inset 0 0 0 0.1rem rgba(255, 255, 255, 0.36), inset 0 0 0 0.2rem rgba(255, 255, 255, 0.30);
+    background-color: rgba(255, 255, 255, 0.25);
+}
+#_box_time ._years_months{
+    display: none;
+}
+#_box_time ._tenyears{
+    display: none;
+}
+#_box_time ._tenyears,._years_months{
+    margin-left: 0.65rem;
+    height: 10.8rem;
+    position: relative;
+    overflow: hidden;
+}
+#_box_time ._tenyears ul,#_box_time ._years_months ul{
+    position: absolute;
+    top: -10.8rem;
+    left: 0;
+}
+#_box_time ._years_months ul:hover{
+    /*top: -10.8rem;*/
+}
+#_box_time ._tenyears li,#_box_time ._years_months li{
+    cursor: pointer;
+    width: 4.15rem;
+    height: 3.6rem;
+    float: left;
+    line-height: 3.6rem;
+    text-align: center;
+}
+#_box_time ._tenyears li:hover,#_box_time ._years_months li:hover{
+    text-shadow: 0 0 1px #fff;
+}

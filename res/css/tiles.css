@@ -1,0 +1,113 @@
+#yl .tiles-box{
+    position: absolute;
+    height: calc(100% - 4px);
+    padding-top: 4px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: calc(100% - 312px);
+    transition:left 0.3s ;
+    /*column-count: 3;*/
+}
+#yl.small-screen .tiles-box{
+    position: absolute;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: calc(100% - 48px);
+}
+#yl .tiles-flex-container{
+    width: 100%;
+    column-gap: 0;
+}
+#yl .tiles{
+    top :0;
+    overflow: hidden;
+    transition: left 0.3s;
+    break-inside: avoid;
+    /*margin-bottom: 2em;*/
+}
+#yl .tiles>.title{
+    color: white;
+    font-size: 12px;
+    padding-left: 4px;
+    line-height: 3em;
+    overflow: hidden;
+    height: 3em;
+    text-overflow: ellipsis;
+}
+#yl .tiles>.title>.tip{
+    float: right;
+    line-height: inherit;
+    font-size: 1.5em;
+    margin-right: 1.5em;
+    opacity: 0;
+    transition: all 0.3s;
+}
+#yl .tiles:hover>.title>.tip {
+    opacity: 1;
+}
+#yl .tiles .vue-grid-item{
+    /*background-color: #4fa1da;*/
+    opacity: 0.9;
+    /*transition: opacity 0.3s ;*/
+}
+
+#yl .tiles .vue-grid-item:hover{
+    opacity: 1;
+    box-shadow: inset 0 0 0px 2px white;
+}
+
+#yl .tiles .vue-grid-item.vue-grid-placeholder{
+    background: rgba(105, 120, 135, 0.52);
+}
+
+#yl .tiles .vue-grid-item .tile{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+#yl .tiles .vue-grid-item .tile>.mask{
+    height: calc(100% - 1px)
+}
+#yl .tiles .vue-grid-item .tile>.mask>.badge {
+    right: 0.2em;
+    top: 0.2em;
+    transform: none;
+    border-radius: 0;
+    padding: 0.2em;
+    min-width: 2em;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.71);
+}
+#yl .vue-grid-item>.vue-resizable-handle{
+    opacity: 0;
+}
+#yl .vue-grid-item:hover>.vue-resizable-handle{
+    opacity: 1;
+}
+#yl .tiles .tile .icon{
+    color:white;
+    position: absolute;
+    text-align: center;
+}
+#yl .tiles .tile .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    font-size: 12px;
+    line-height: 14px;
+    max-height: 28px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.5em;
+    text-shadow: 0px 0px 4px #0000006b;
+}
+
+#yl .tiles .tile .custom-tile{
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+}

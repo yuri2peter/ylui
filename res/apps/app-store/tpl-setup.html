@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="../../yl.app.js"></script>
+    <title>示例-APP引导安装</title>
+    <style>
+        body{
+            padding: 0;
+            margin:0;
+        }
+        .left{float: left}
+        .clear{clear: both}
+        .btn{
+            padding: 1.5em;
+            color: rgb(30,158,116);
+            width: 16em;
+            text-align: center;
+            cursor: pointer;
+            margin: 2em auto;
+            border: 1px solid rgb(30,158,116);
+            transition: all 0.3s;
+        }
+        .btn:hover{
+            border-radius: 1em;
+            color: rgb(36, 190, 139);
+        }
+        #header{
+            color: lightgray;
+            text-align: center;
+            background-color: rgb(51,51,51);
+            padding: 40px;
+
+        }
+        #title{
+            font-size: 32px;
+            font-weight: bold;
+        }
+        #sub-title{
+            margin-top: 2em;
+        }
+        #body{
+            padding: 2em;
+        }
+        #preview{
+            width: 30%;
+            display: block;
+        }
+        #content{
+            width: 60%;
+            margin-left: 5%;
+        }
+        @media screen and (max-width: 768px) {
+
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="title">APP名称</div>
+        <div id="sub-title">APP副标题</div>
+        <div class="btn">立即安装</div>
+    </div>
+    <div id="body">
+        <img id="preview" class="left" src="./preview.jpg"/>
+        <div id="content" class="left">
+            <p>介绍性文字</p>
+            <ul>
+                <li>特性1</li>
+                <li>特性2</li>
+                <li>特性3</li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</body>
+</html>

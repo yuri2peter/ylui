@@ -1,0 +1,25 @@
+.layui-layer.yl{
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    min-width: 300px;
+}
+.layui-layer.yl .layui-layer-title{
+    background-color: inherit;
+    border-bottom: 1px solid transparent;
+}
+
+.layui-layer.yl .layui-layer-btn0,.layui-layer.yl .layui-layer-btn1{
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 0 1em;
+}
+
+.layui-layer.yl .layui-layer-content .layui-layer-input{
+    margin: 0 auto;
+    display: block;
+    width: calc(100% - 50px);
+    line-height: 20px;
+    padding: 0.5em;
+    outline: none;
+}

@@ -1,0 +1,381 @@
+{
+  "configs": {
+    "topTaskBar": false,
+    "sound": false,
+    "wallpaper": "./res/img/wallpapers/bg1.jpg",
+    "wallpaperBlur": false,
+    "wallpaperSlide": false,
+    "wallpaperSlideRandom": true,
+    "wallpaperSlideItv": 1,
+    "wallpaperSlideTime": 1519442460788,
+    "wallpaperSlideIndex": 8,
+    "openMax": 9,
+    "idCounter": 140,
+    "themeColor": "rgba(2,35,64,1)",
+    "autoThemeColor": true,
+    "wallpapers": [
+      {
+        "image": "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
+      },
+      {
+        "image": "./res/img/wallpapers/bg1.jpg",
+        "preview": "./res/img/wallpapers/bg1_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg2.jpg",
+        "preview": "./res/img/wallpapers/bg2_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg3.jpg",
+        "preview": "./res/img/wallpapers/bg3_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg4.jpg",
+        "preview": "./res/img/wallpapers/bg4_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg5.jpg",
+        "preview": "./res/img/wallpapers/bg5_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg6.jpg",
+        "preview": "./res/img/wallpapers/bg6_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg7.jpg",
+        "preview": "./res/img/wallpapers/bg7_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg8.jpg",
+        "preview": "./res/img/wallpapers/bg8_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg9.jpg",
+        "preview": "./res/img/wallpapers/bg9_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg10.jpg",
+        "preview": "./res/img/wallpapers/bg10_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg11.jpg",
+        "preview": "./res/img/wallpapers/bg11_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg12.jpg",
+        "preview": "./res/img/wallpapers/bg12_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg13.jpg",
+        "preview": "./res/img/wallpapers/bg13_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg14.jpg",
+        "preview": "./res/img/wallpapers/bg14_1.jpg"
+      },
+      {
+        "image": "./res/img/wallpapers/bg15.jpg",
+        "preview": "./res/img/wallpapers/bg15_1.jpg"
+      }
+    ],
+    "highPerformance": false,
+    "highPerformanceOnMobile": true,
+    "pathRes": "./res",
+    "shortcutsSortAuto": true,
+    "debug": false,
+    "winBlur": true
+  },
+  "apps": {
+    "yl-system": {
+      "addressBar": false,
+      "autoRun": 0,
+      "background": false,
+      "badge": 0,
+      "desc": "YLUI系统设置面板",
+      "icon": {
+        "type": "fa",
+        "bg": "#436fde",
+        "content": "gear"
+      },
+      "openMode": "normal",
+      "plugin": false,
+      "position": {
+        "x": "x*0.05",
+        "y": "y*0.05",
+        "left": true,
+        "top": true,
+        "autoOffset": true
+      },
+      "version": "1.0.0",
+      "poweredBy": "YLUI",
+      "resizable": true,
+      "single": true,
+      "size": {
+        "width": "920",
+        "height": "590"
+      },
+      "title": "系统设置",
+      "url": "./res/apps/yl-system/index.html",
+      "customTile": "",
+      "resizeable": true
+    },
+    "yl-color-picker": {
+      "addressBar": false,
+      "autoRun": 0,
+      "background": false,
+      "badge": 0,
+      "desc": "简单的取色器",
+      "icon": {
+        "type": "fa",
+        "bg": "#3289c7",
+        "content": "eyedropper"
+      },
+      "openMode": "normal",
+      "plugin": false,
+      "position": {
+        "x": "(x-207)/2",
+        "y": "(y-239)/2",
+        "left": true,
+        "top": true,
+        "autoOffset": false
+      },
+      "version": "1.0.0",
+      "poweredBy": "Yuri2",
+      "resizable": true,
+      "single": true,
+      "size": {
+        "width": "207",
+        "height": "239"
+      },
+      "title": "取色器",
+      "url": "./res/apps/colorPicker/colorPicker.html",
+      "customTile": "",
+      "resizeable": false
+    },
+    "yl-browser": {
+      "addressBar": true,
+      "autoRun": 0,
+      "background": false,
+      "badge": 0,
+      "desc": "浏览器",
+      "icon": {
+        "type": "fa",
+        "content": "internet-explorer",
+        "bg": "#3a55c2"
+      },
+      "openMode": "normal",
+      "plugin": false,
+      "position": {
+        "autoOffset": true,
+        "left": true,
+        "top": true,
+        "x": "x*0.1",
+        "y": "y*0.1"
+      },
+      "version": "1.0.0",
+      "poweredBy": "Yuri2",
+      "resizable": true,
+      "single": false,
+      "size": {
+        "height": "y*0.8-80",
+        "width": "x*0.8"
+      },
+      "title": "浏览器",
+      "url": "./res/apps/browser/index.html",
+      "customTile": "",
+      "resizeable": true
+    },
+    "yl-app-store": {
+      "addressBar": false,
+      "autoRun": 0,
+      "background": false,
+      "badge": 0,
+      "desc": "",
+      "icon": {
+        "type": "fa",
+        "content": "shopping-bag",
+        "bg": "#b36aba"
+      },
+      "openMode": "normal",
+      "plugin": false,
+      "position": {
+        "autoOffset": true,
+        "left": true,
+        "top": true,
+        "x": "x*0.1",
+        "y": "y*0.1"
+      },
+      "version": "1.0.0",
+      "poweredBy": "Yuri2",
+      "resizable": true,
+      "single": true,
+      "size": {
+        "height": "y*0.8-80",
+        "width": "x*0.8"
+      },
+      "title": "应用商店",
+      "url": "https://appstore.ylui.yuri2.cn",
+      "customTile": "",
+      "resizeable": true
+    },
+    "yl-app-home": {
+      "addressBar": false,
+      "autoRun": 0,
+      "background": false,
+      "badge": 0,
+      "desc": "YLUI官方网站",
+      "icon": {
+        "type": "fa",
+        "content": "yoast",
+        "bg": "#6b96cf"
+      },
+      "openMode": "normal",
+      "plugin": false,
+      "position": {
+        "autoOffset": true,
+        "left": true,
+        "top": true,
+        "x": "x*0.1",
+        "y": "y*0.1"
+      },
+      "version": "1.0.0",
+      "poweredBy": "Yuri2",
+      "resizable": true,
+      "single": true,
+      "size": {
+        "height": "y*0.8-80",
+        "width": "x*0.8"
+      },
+      "title": "YLUI 官网",
+      "url": "https://ylui.yuri2.cn",
+      "customTile": "",
+      "resizeable": true
+    },
+    "yl-server": {
+      "addressBar": false,
+      "autoRun": 1,
+      "background": false,
+      "badge": 0,
+      "desc": "YLUI官方后台服务",
+      "icon": {
+        "type": "fa",
+        "content": "yoast",
+        "bg": "#6b96cf"
+      },
+      "openMode": "min",
+      "plugin": true,
+      "position": {
+        "autoOffset": false,
+        "left": false,
+        "top": false,
+        "x": "4",
+        "y": "4"
+      },
+      "version": "1.0.0",
+      "poweredBy": "Yuri2",
+      "resizable": true,
+      "single": true,
+      "size": {
+        "height": "y*0.8-80",
+        "width": "x*0.8"
+      },
+      "title": "YLUI官方后台服务",
+      "url": "https://server.ylui.yuri2.cn",
+      "customTile": "",
+      "resizeable": true
+    }
+  },
+  "shortcuts": [
+    {
+      "app": "yl-browser",
+      "title": "浏览器",
+      "params": {},
+      "hash": ""
+    },
+    {
+      "app": "yl-app-store",
+      "title": "应用商店",
+      "params": {},
+      "hash": ""
+    },
+    {
+      "app": "yl-app-home",
+      "title": "YLUI 官网",
+      "params": {},
+      "hash": ""
+    }
+  ],
+  "tiles": [
+    {
+      "title": "系统",
+      "data": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 3,
+          "app": "yl-app-store",
+          "title": "应用商店",
+          "i": "91",
+          "params": {},
+          "hash": ""
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "w": 2,
+          "h": 2,
+          "app": "yl-system",
+          "title": "系统设置",
+          "i": "110",
+          "params": {},
+          "hash": ""
+        }
+      ]
+    },
+    {
+      "title": "工具",
+      "data": []
+    }
+  ],
+  "startMenu": {
+    "sidebar": [
+      {
+        "app": "yl-browser",
+        "title": "浏览器",
+        "params": {},
+        "hash": ""
+      },
+      {
+        "app": "yl-system",
+        "title": "系统设置"
+      }
+    ],
+    "menu": {
+      "itemPushed-85": {
+        "app": "yl-browser",
+        "title": "浏览器",
+        "params": {},
+        "hash": ""
+      },
+      "itemPushed-89": {
+        "app": "yl-app-home",
+        "title": "YLUI 官网",
+        "params": {},
+        "hash": ""
+      },
+      "itemPushed-96": {
+        "app": "yl-system",
+        "title": "系统设置",
+        "params": {},
+        "hash": ""
+      },
+      "itemPushed-88": {
+        "app": "yl-app-store",
+        "title": "应用商店",
+        "params": {},
+        "hash": ""
+      }
+    }
+  }
+}

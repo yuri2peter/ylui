@@ -1,0 +1,95 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.clear {
+    clear: both;
+}
+#banner{
+    background-color: #070744;
+    color: white;
+    font-size: 36px;
+    line-height: 4em;
+    padding-left: 2em;
+}
+#footer{
+    background-color: gainsboro;
+    font-size: 14px;
+    text-align: center;
+    line-height: 4em;
+    padding-left: 2em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+#app {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.box {
+    /*border: 1px solid silver;*/
+    /*box-shadow: 3px 3px 5px #d0d0d0;*/
+    margin: 20px auto;
+    overflow-x: hidden;
+    padding: 1em;
+}
+
+.labels, .apps {
+
+}
+
+.labels {
+
+}
+
+.label {
+    float: left;
+    border-radius: 0.4em;
+    border: 1px solid gray;
+    padding: 0.5em;
+    font-size: 12px;
+    margin: 0.2em;
+    cursor: pointer;
+    word-break: keep-all;
+}
+
+.label.active {
+
+}
+
+.apps {
+    overflow: hidden;
+}
+
+.app {
+    margin-bottom: 1em;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 1em;
+}
+
+.app:hover {
+    border-color: #2D93CA;
+}
+
+.app img {
+    width: 100%;
+    height:48px;
+}
+
+.app .title {
+    font-size: 14px;
+    text-align: center;
+    line-height: 16px;
+    height: 32px;
+    overflow: hidden;
+    margin-top: 1em;
+}

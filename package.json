@@ -1,0 +1,27 @@
+{
+  "name": "YLUI",
+  "main": "index.html",
+  "description": "新一代云桌面",
+  "version": "1.0.0",
+  "window": {
+    "title": "YLUI",
+    "icon": "link.png",
+    "toolbar": false,
+    "resizable": true,
+    "fullscreen": true,
+    "show_in_taskbar": true,
+    "frame": true,
+    "position": "center",
+    "width": 1366,
+    "height": 768,
+    "min_width": 400,
+    "min_height": 335,
+    "show": true,
+    "kiosk": false
+  },
+  "webkit": {
+    "plugin": true,
+    "java": false,
+    "page-cache": false
+  }
+}

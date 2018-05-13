@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>colorPicker</title>
+    <script src="../../components/jquery-2.2.4.min.js"></script>
+    <script src="../../components/color-picker/color-picker.js"></script>
+    <script src="../../yl.app.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../components/color-picker/color-picker.css"/>
+    <style>
+        html,body{
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="picker"></div>
+<script>
+    YLApp.onReady(function () {
+        var color=YLApp.data.color?YLApp.data.color:'000000';
+        color=color.replace(/^#/,'');
+        if(!/^[\da-zA-Z]{6}$/.test(color)){
+            color="000000"
+        }
+        $('#picker').colpick({
+            flat:true,
+            layout:'hex',
+            color:color,
+            submit:0,
+            onChange:function(hsb,hex,rgb,el){
+                if(YLApp.data.parent){
+                    var color="#"+hex;
+                    YLApp.emit('setColorFromColorPicker',color,YLApp.data.parent);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

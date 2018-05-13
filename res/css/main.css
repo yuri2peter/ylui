@@ -1,0 +1,1182 @@
+html {
+    height: 100%;
+    font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif, "宋体" !important;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+#yl {
+    width: 100%;
+    height: 100%;
+    /*background: #2a2a2f no-repeat fixed;*/
+    background-size: 100% 100%;
+    transition: opacity 1s;
+    /*禁用选中*/
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+#yl .opacity-enter-active, .opacity-leave-active {
+    transition: opacity 0.2s,transform 0.2s !important;
+}
+#yl .opacity-leave-active,.opacity-enter{
+    transform: scale3d(0.9, 0.9, 1);
+    opacity: 0 !important;
+}
+
+
+#yl .shadow {
+    box-shadow: rgba(7, 7, 7, 0.2) 0px 0px 20px 2px
+}
+#yl .shadow-inside{
+    box-shadow: inset rgba(7, 7, 7, 0.2) 0px 0px 20px 2px
+}
+#yl .shadow-hover:hover {
+    box-shadow: rgba(7, 7, 7, 0.2) 0px 0px 20px 2px
+}
+#yl .shadow-inside-hover:hover{
+    box-shadow: inset rgba(7, 7, 7, 0.2) 0px 0px 20px 2px
+}
+#yl .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
+}
+
+#yl .selectable {
+    -webkit-touch-callout: default; /* iOS Safari */
+    -webkit-user-select: text; /* Chrome/Safari/Opera */
+    -khtml-user-select: text; /* Konqueror */
+    -moz-user-select: text; /* Firefox */
+    -ms-user-select: text; /* Internet Explorer/Edge */
+}
+
+#yl .shader {
+    position: fixed;
+    /*top:0;*/
+    /*left:0;*/
+    /*width:100%;*/
+    /*height:100%;*/
+    width: 120%;
+    height: 120%;
+    left: -10%;
+    top: -10%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#yl .blur {
+    -webkit-filter: blur(8px); /* Chrome, Opera */
+    -moz-filter: blur(8px);
+    -ms-filter: blur(8px);
+    filter: blur(8px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=8, MakeShadow=false);
+    transition: filter 0.3s;
+    transition: -webkit-filter 0.3s;
+    transition: -moz-filter 0.3s;
+    transition: -ms-filter 0.3s;
+}
+
+#yl .desktop {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: calc(100% - 40px);
+    z-index: 0;
+    background-color: black;
+}
+
+#yl .shortcut {
+    width: 64px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    transition: opacity 0.3s, top 0.3s, left 0.3s, border 0.3s, background-color 0.3s;
+}
+
+#yl.small-screen .shortcut {
+    width: 56px;
+}
+
+#yl .shortcut.cut {
+    opacity: 0.5;
+}
+
+#yl .shortcut.move {
+    transition: none;
+    z-index: 3;
+}
+
+#yl .shortcut.insert {
+    border-bottom: 1px solid white;
+}
+
+#yl .shortcut.over {
+    background-color: rgba(62, 70, 167, 0.75);
+}
+
+#yl > .desktop > .shortcut {
+    position: absolute;
+}
+
+#yl .shortcut:hover {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: rgba(239, 255, 236, 0.25);
+}
+
+#yl .icon > img {
+    width: 100%;
+    height: 100%
+}
+
+#yl .shortcut .icon {
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+    line-height: 40px;
+    text-align: center;
+    margin: 5px auto;
+    color: white;
+    position: relative;
+    /*border: 1px solid rgba(255, 255, 255, 0.5);*/
+}
+
+#yl.small-screen .shortcut .icon {
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+    line-height: 36px;
+}
+
+#yl .shortcut .title {
+    color: white;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 5px;
+    transition: all 0.5s;
+    height: 28px;
+    overflow: hidden;
+}
+
+#yl.small-screen .shortcut .title {
+    font-size: 9px;
+    line-height: 12px;
+    height: 24px;
+    margin-bottom: 2px;
+}
+
+#yl .icon-drawer {
+    width: 40px;
+    height: 40px;
+    margin: 5px auto;
+    /*border: 1px solid rgba(255, 255, 255, 0.5);*/
+    /*overflow: hidden;*/
+    /*padding: 4px;*/
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.19);
+}
+
+#yl .icon-drawer .icon-drawer-pre {
+    display: none;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    color: white;
+}
+
+#yl .icon-drawer .icon-drawer-pre > img {
+    width: 100%;
+    height: 100%;
+}
+
+#yl .icon-drawer .icon-drawer-pre:nth-child(1) {
+    display: block;
+    top: 3px;
+    left: 3px;
+}
+
+#yl .icon-drawer .icon-drawer-pre:nth-child(2) {
+    display: block;
+    top: 3px;
+    left: 21px;
+}
+
+#yl .icon-drawer .icon-drawer-pre:nth-child(3) {
+    display: block;
+    top: 21px;
+    left: 3px;
+}
+
+#yl .icon-drawer .icon-drawer-pre:nth-child(4) {
+    display: block;
+    top: 21px;
+    left: 21px;
+}
+
+#yl .desktop .win {
+    position: absolute;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+#yl .desktop .win .bar {
+    position: relative;
+    background-color: transparent;
+}
+
+#yl .desktop .win.plugin .bar, #yl .desktop .win.plugin .address-bar {
+    opacity: 0;
+}
+
+#yl .desktop .win.plugin .bar:hover, #yl .desktop .win.plugin .address-bar:hover {
+    opacity: 1 !important;
+}
+
+#yl .desktop .win.active {
+    /*box-shadow: 0 0 16px rgba(255, 255, 255, 0.1);*/
+
+}
+
+#yl .desktop .win .bar-mask {
+    background-color: white;
+}
+
+#yl .desktop .win.active .bar-mask {
+    background-color: black;
+}
+
+#yl .desktop .win .bar .title {
+    width: calc(100% - 196px);
+    height: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+    color: #dad8d8;
+    font-size: 14px;
+    cursor: move;
+    padding-left: 30px;
+
+}
+
+#yl .desktop .win .bar.no-max .title {
+    width: calc(100% - 140px);
+}
+
+#yl .desktop .win.active .bar .title {
+    color: white;
+}
+
+#yl .desktop .win .init {
+    position: absolute;
+    width: 100%;
+    height: calc(100% + 80px);
+    top: -80px;
+    left: 0;
+    z-index: 2;
+    background-color: #BBB5B5;
+}
+
+#yl .desktop .win.addressBar-hidden .init {
+    height: calc(100% + 40px);
+    top: -40px;
+
+}
+
+#yl .desktop .win .init .icon {
+    font-size: 16px;
+    display: inline-block;
+    position: absolute;
+    line-height: 20px;
+    text-align: center;
+    color: white;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#yl .desktop .win .bar-box {
+    position: absolute;
+    top: -80px;
+    width: 100%;
+    box-shadow: inherit;
+}
+
+#yl .desktop .win.addressBar-hidden .bar-box {
+    top: -40px;
+}
+
+#yl .desktop .win .bar .title .icon {
+    font-size: 16px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    line-height: 20px;
+    text-align: center;
+}
+
+#yl .desktop .win .bar .title:before {
+    content: '  ';
+    margin-left: 0.5em;
+}
+
+#yl .desktop .win .bar .tools {
+    width: 164px;
+    float: right;
+    cursor: default;
+    text-align: right;
+    height: 40px;
+    overflow: hidden;
+}
+
+#yl .desktop .win .bar.no-max .tools {
+    width: 110px;
+}
+
+/*#yl .desktop .win.plugin .bar .tools{*/
+/*width: 86px;*/
+/*}*/
+#yl .desktop .win .bar .tools .tool {
+    color: white;
+    display: inline-block;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#yl .desktop .win .bar .tools .tool:hover {
+    background-color: rgba(255, 255, 255, 0.34);
+}
+
+#yl .desktop .win .bar .tools .tool.close:hover {
+    background-color: red;
+}
+
+#yl .desktop .win .address-bar {
+    background-color: rgb(242, 242, 242);
+    position: relative;
+    height: 40px;
+    top: -1px;
+    transition: all 0.3s;
+    line-height: 40px;
+    width: 100%;
+    overflow: hidden;
+    padding-left: 1em;
+    box-sizing: border-box;
+}
+
+#yl .desktop .win .address-bar .btns {
+    color: black;
+    line-height: 1.5em;
+    width: 1.5em;
+    height: 1.5em;
+    cursor: pointer;
+}
+
+#yl .desktop .win .address-bar .btns.disable {
+    color: darkgrey;
+}
+
+#yl .desktop .win .address-bar .btns:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#yl .desktop .win .address-bar input {
+    position: relative;
+    bottom: -4px;
+    margin-right: 3px;
+    width: calc(100% - 166px);
+    padding: 0.5em;
+    color: grey;
+    outline: none;
+    float: right;
+}
+
+#yl .desktop .win .win-drag-placeholder {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    top: -1px;
+}
+
+#yl .desktop .win .win-drag-placeholder .win-move {
+    position: absolute;
+    width: 100%;
+    height: 15px;
+    left: -15px;
+    bottom: -10px;
+    cursor: move;
+    z-index: 99;
+}
+
+#yl .desktop .win .win-drag-placeholder .loading-box {
+    opacity: 0.7;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background-color: rgb(34, 34, 34);
+    z-index: 2;
+}
+
+#yl .desktop .win .win-drag-placeholder .loading-box > img {
+    width: 200px;
+    height: 150px;
+    margin-top: -75px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -100px;
+}
+
+#yl .desktop .win .win-drag-placeholder .frm {
+    resize: none;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+}
+
+#yl .desktop .win.plugin {
+    box-shadow: none;
+}
+
+#yl .desktop .win.plugin .win-drag-placeholder .frm {
+    background-color: transparent;
+}
+
+#yl .desktop .win.plugin:hover .bar, #yl .desktop .win.plugin:hover .address-bar {
+    opacity: 0.5;
+}
+
+#yl .desktop .win .win-drag-placeholder {
+    resize: none;
+    position: relative;
+    top: -1px;
+    /*border: 1px solid darkgray;*/
+}
+
+#yl .desktop .win.plugin .win-drag-placeholder {
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+#yl .desktop .win.plugin:hover .win-drag-placeholder {
+    border: 1px solid darkgray;
+}
+
+#yl .desktop .win .win-drag-placeholder.drag {
+    background-color: rgba(240, 240, 240, 0.64);
+}
+
+#yl .desktop .win .win-resize {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
+    z-index: 99;
+}
+
+#yl .bar {
+    height: 40px;
+    line-height: 40px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    cursor: default;
+    /*box-shadow: 0 0 16px #555;*/
+}
+
+#yl > .bar {
+    bottom: 0;
+    width: 100%;
+    z-index: 19930813;
+    position: fixed;
+    box-sizing: border-box;
+}
+
+#yl .bar .plugin-icons {
+    box-sizing: border-box;
+    position: absolute;
+    width: 146px;
+    background-color: transparent;
+    top: auto;
+    bottom: 40px;
+    right: 80px;
+    min-height: 32px;
+}
+
+#yl .bar .plugin-icon {
+    display: block;
+    float: left;
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+    /*background-color: rgba(44, 44, 44, 0.73);*/
+}
+
+#yl .bar .plugin-icon .icon {
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    line-height: 24px;
+    text-align: center;
+    top: 2px;
+    left: 5px;
+}
+
+#yl .bar .plugin-icon:hover {
+    background-color: rgba(255, 255, 255, 0.22);
+}
+
+#yl .bar.top .plugin-icons {
+    top: 40px;
+    bottom: auto;
+}
+
+#yl .bar .calendar-box {
+    box-sizing: border-box;
+    position: absolute;
+    top: auto;
+    bottom: 40px;
+    right: 0;
+    display: block;
+    min-height: 32px;
+    z-index: -1;
+}
+#yl .bar.top .calendar-box{
+    top: 40px;
+    bottom: auto;
+}
+#yl .bar .btn {
+    min-width: 28px;
+    text-align: center;
+    line-height: inherit;
+    font-size: 18px;
+    transition: all 0.5s;
+    float: left;
+    height: 100%;
+    padding: 0 10px;
+    position: relative;
+    margin-right: 1px;
+}
+
+#yl .bar .btn:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+
+}
+
+#yl .bar #yl-btn-right-bottom {
+    border-left: rgba(255, 255, 255, 0.6) 1px solid;
+    width: 4px;
+    margin-left: 3px;
+    padding: 0;
+    float: right;
+    min-width: 0;
+}
+
+#yl.small-screen .bar #yl-btn-right-bottom {
+    width: 32px;
+}
+
+#yl .bar .btn.win-task .icon {
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    float: left;
+    position: relative;
+    top: 9px;
+    margin-left: 0.5em;
+    margin-bottom: 20px;
+}
+
+#yl .bar .btn.win-task .title {
+    color: white;
+    text-align: left;
+    font-size: 12px;
+    line-height: 40px;
+    float: left;
+    margin: 0 0.5em;
+    width: calc(100% - 50px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: inherit;
+    overflow: hidden;
+}
+
+#yl .bar .btn.win-task .line {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    width: calc(100% - 10px);
+    transition: all 0.5s;
+    background-color: rgba(255, 255, 255, 0.47);
+    left: 5px;
+}
+
+#yl .bar.top .btn.win-task .line {
+    top: 0;
+    bottom: auto;
+}
+
+#yl .bar .btn.win-task:hover .line {
+    width: calc(100% - 0px);
+    left: 0;
+}
+
+#yl .bar .btn.win-task.active .line {
+    width: calc(100% - 0px);
+    left: 0;
+}
+
+#yl .bar .btn.win-task {
+    min-width: 0;
+    max-width: 150px;
+    text-align: left;
+    overflow: hidden;
+    padding: 0;
+    height: 100%;
+}
+
+#yl .bar .btn.win-task.active {
+    background-color: rgba(191, 191, 191, 0.25);
+}
+
+#yl .badge {
+    background-color: #ff4949;
+    border-radius: 10px;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 6px;
+    text-align: center;
+    white-space: nowrap;
+    /*border: 1px solid #fff;*/
+    top: 0;
+    right: 10px;
+    position: absolute;
+    transform: translateY(-50%) translateX(100%);
+}
+
+#yl .desktop .background-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: transparent;
+}
+
+#yl .desktop .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -999;
+    background-size: 100% 100%;
+    transform: scale3d(1.1, 1.1, 1);
+}
+
+#yl.small-screen .desktop .background {
+    background-size: auto 100%;
+    background-position: center center;
+}
+
+#yl.horizontal-screen.small-screen .desktop .background {
+    background-size: 100% 100%;
+}
+
+#yl .drawer {
+    position: absolute;
+    width: 40%;
+    max-width: 600px;
+    min-height: 240px;
+    left: 50%;
+    top: 50%;
+    /*box-shadow: 0 0 16px rgba(255, 255, 255, 0.26);*/
+    /*border: 1px solid white;*/
+    max-height: 500px;
+    overflow: auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.29);
+    color: white;
+    transform: translate(-50%, -50%);
+    overflow-x: hidden;
+}
+
+#yl.small-screen .drawer {
+    width: 284px;
+}
+
+#yl .drawer .line {
+    line-height: 40px;
+}
+
+#yl .drawer .line span {
+    width: 78px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 14px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#yl.small-screen .drawer .line span {
+    width: 50px;
+
+}
+
+#yl .drawer .line input {
+    background-color: transparent;
+    color: white;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0.4em;
+    width: calc(100% - 12em);
+}
+
+#yl.small-screen .drawer .line input {
+    width: 10em;
+}
+
+#yl .drawer .line input:first-child {
+    width: 42px;
+    margin-left: 28px;
+    margin-right: 15px;
+    text-align: right;
+}
+
+#yl.small-screen .drawer .line input:first-child {
+    margin-left: 0;
+}
+
+#yl .drawer .line input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#yl .drawer .line i {
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 0.5em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#yl .drawer .line i:hover {
+    color: white;
+}
+
+#yl .drawer > .shortcut {
+    display: inline-block;
+    position: relative;
+}
+
+#yl .drawer > .title {
+    font-size: 14px;
+    box-sizing: border-box;
+    color: white;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    line-height: 34px;
+    margin-bottom: 1em;
+}
+
+#yl .drawer > .title > .btn-advance {
+    float: right;
+    border: 1px solid;
+    padding: 0.5em;
+    line-height: 10px;
+    position: relative;
+    top: 3px;
+    font-size: 12px;
+    opacity: 0.8;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+#yl .drawer > .title > .btn-advance:hover {
+    opacity: 1;
+}
+
+/*#yl .drawer>.shader{*/
+/*position: fixed;*/
+/*background: rgba(0, 0, 0, 0);*/
+/*width: 100%;*/
+/*height:100%;*/
+/*left: 0;*/
+/*top:0;*/
+
+/*}*/
+
+#yl .startMenu {
+    position: fixed;
+    left: 0;
+    cursor: default;
+    overflow: hidden;
+    z-index: 19930000;
+    top: auto;
+    bottom: 40px;
+    transition: opacity 0.3s;
+    height: calc(100% - 40px);
+    width: 100%;
+}
+
+#yl .startMenu.topTaskBar {
+    top: 40px;
+    bottom: auto;
+}
+
+/*左侧边栏*/
+#yl .startMenu .sidebar {
+    width: 48px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: all 0.3s;
+    overflow: hidden;
+    z-index: 2;
+}
+
+#yl .startMenu .sidebar.spread {
+    width: 256px;
+    /*background-color: rgb(39, 39, 39);*/
+}
+
+#yl .startMenu .sidebar .btn-group {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#yl .startMenu .sidebar .btn {
+    min-width: 28px;
+    width: 256px;
+    text-align: left;
+    line-height: 52px;
+    font-size: 18px;
+    transition: all 0.5s;
+    float: left;
+    position: relative;
+    color: white;
+    padding-left: 12px;
+}
+
+#yl .startMenu .sidebar .btn:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important
+}
+
+#yl .startMenu .sidebar .btn .icon {
+    font-size: 16px;
+    display: inline-block;
+    position: relative;
+    width: 23.14px;
+    height: 23.14px;
+    line-height: 23.14px;
+    text-align: center;
+}
+
+#yl .startMenu .sidebar .btn .icon > img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 4px;
+}
+
+#yl .startMenu .sidebar .title {
+    padding-left: 20px;
+    line-height: inherit;
+    font-size: 14px;
+}
+
+#yl .startMenu .menu {
+    position: absolute;
+    overflow-x: hidden;
+    width: 256px;
+    height: 100%;
+    left: 52px;
+    z-index: 1;
+    padding-top: 6px;
+    transition: left 0.3s;
+}
+
+#yl.small-screen .startMenu .menu {
+    width: calc(100% - 48px);
+}
+
+#yl .startMenu .menu .item {
+    color: white;
+    line-height: 34px;
+    position: relative;
+    padding: 0 10px;
+    transition: all 0.2s;
+    overflow: hidden;
+    height: 0;
+}
+
+#yl .startMenu .menu .item.open {
+    height: 34px;
+}
+
+#yl .startMenu .menu .item:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important
+}
+
+#yl .startMenu .menu .item .icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    text-align: center;
+    font-size: 22px;
+    line-height: 30px;
+    top: 2px;
+}
+
+#yl .startMenu .menu .item .icon-drawer {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    /* text-align: center; */
+    /* font-size: 22px; */
+    /* line-height: 30px; */
+    top: 2px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 0;
+}
+
+#yl .startMenu .menu .item .icon-drawer .icon-drawer-pre {
+    width: 12px;
+    height: 12px;
+    font-size: 10px;
+    line-height: 12px;
+    overflow: hidden;
+}
+
+#yl .startMenu .menu .item .icon-drawer .icon-drawer-pre:nth-child(1) {
+    top: 2px;
+    left: 2px;
+}
+
+#yl .startMenu .menu .item .icon-drawer .icon-drawer-pre:nth-child(2) {
+    top: 2px;
+    left: 16px;
+}
+
+#yl .startMenu .menu .item .icon-drawer .icon-drawer-pre:nth-child(3) {
+    top: 17px;
+    left: 2px;
+}
+
+#yl .startMenu .menu .item .icon-drawer .icon-drawer-pre:nth-child(4) {
+    top: 17px;
+    left: 16px;
+}
+
+#yl .startMenu .menu .item .icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 2px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+#yl .startMenu .menu .item .title {
+    font-size: 12px;
+    line-height: inherit;
+    margin-left: 40px;
+}
+
+#yl .startMenu .menu .item .arrow {
+    position: absolute;
+    line-height: inherit;
+    right: 0;
+    bottom: 0;
+    width: 1.5em;
+    padding-right: 0.5em;
+    transition: all 0.2s;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#yl .startMenu .menu .item .arrow.open {
+    bottom: -34px;
+}
+
+#yl .center {
+    color: white;
+    /*background-color: rgba(0, 0, 0, 0.82);*/
+    width: 360px;
+    height: calc(100% - 40px);
+    position: fixed;
+    right: -360px;
+    top: 0;
+    /*box-shadow: 0 0 16px #555;*/
+    z-index: 19930003;
+    transition: all 0.5s;
+}
+
+#yl.small-screen .center {
+    width: 100%;
+    right: -100%;
+}
+
+#yl .center.open {
+    right: 0;
+}
+
+#yl .center .banner {
+    color: white;
+    line-height: 54px;
+    font-size: 16px;
+    padding-left: 1em;
+    font-weight: bold;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#yl .center .banner .clear {
+    position: absolute;
+    bottom: 0;
+    right: 16px;
+    font-size: 12px;
+    color: #ffffff82;
+    line-height: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#yl .center .banner .clear:hover {
+    color: white;
+}
+
+#yl .center .banner.no-msg {
+    position: absolute;
+    width: 100%;
+    color: #ffffff82;
+}
+
+#yl .center .msgs {
+    overflow: auto;
+    height: calc(100% - 120px);
+}
+
+#yl .center .msg {
+    padding: 8px;
+    margin: 14px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+#yl .center .msg .title {
+    color: #e3e3e3;
+    font-size: 16px;
+    line-height: 36px;
+    transition: all 0.5s;
+}
+
+#yl .center .msg .content {
+    color: rgba(255, 255, 255, 0.64);
+    font-size: 12px;
+    line-height: 18px;
+    transition: all 0.5s;
+    word-break: break-all;
+}
+
+#yl .center .msg:hover .title {
+    color: #f3f3f3;
+}
+
+#yl .center .msg:hover .content {
+    color: #f3f3f3;
+}
+
+#yl .center .msg .btn-close {
+    color: #e3e3e3;
+    float: right;
+    position: relative;
+    right: -30px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+#yl .center .msg:hover .btn-close {
+    right: 0;
+}
+
+/*消息预览框*/
+#yl .msg-attention {
+    margin: 5px;
+    padding: 12px;
+    height: 140px;
+    width: 240px;
+    overflow: hidden;
+    position: fixed;
+    z-index: 19930004;
+    right: 0;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.53);
+}
+
+#yl .msg-attention .title {
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    height: 27px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#yl .msg-attention .content {
+    font-size: 12px;
+    line-height: 18px;
+    /*color: grey;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

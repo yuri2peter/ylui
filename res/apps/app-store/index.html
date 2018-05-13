@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>应用商店</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../../../res/components/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./style.css"/>
+    <script src="../../yl.app.js"></script>
+    <script src="../../../res/js/Yuri2.js"></script>
+    <link rel="stylesheet" href="../../../res/css/grid.css"/>
+    <script src="../../../res/components/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="banner">
+        YLUI 应用商店
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <div class="row apps box">
+                    <div class="app col-xs-6 col-sm-3 col-md-2 col-lg-2"
+                         :class="{active:isAppActive(app)}"
+                         v-show="isAppActive(app)"
+                         v-for="app in apps" @click="appClick(app)">
+                        <img onerror="this.src='./error.png'" :src="app.icon"/>
+                        <div class="title">{{app.title}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="labels box">
+                    <input v-model="search" style="line-height: 1.5em;width: 100%;padding: 0.5em" placeholder="查询"/>
+                </div>
+                <div class="labels box">
+                    <div class="label"
+                         @click="labelClick(label)"
+                         :class="{active:label.active}"
+                         :style="labelStyle(label)"
+                         v-for="label in labels">{{label.name}}
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="footer">
+        ©2018 ylui.yuri2.com
+    </div>
+</div>
+<script src="./script.js"></script>
+</body>
+</html>

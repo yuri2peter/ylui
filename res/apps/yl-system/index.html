@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>系统设置</title>
+    <script src="../../components/vue.min.js"></script>
+    <script src="../../js/yl-vue-component-icon.js"></script>
+    <script src="../../js/Yuri2.js"></script>
+    <script src="../../components/jquery-2.2.4.min.js"></script>
+    <script src="../../components/clipboard-polyfill.js"></script>
+    <script src="../../components/layer-v3.0.3/layer/layer.full.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../components/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="../../components/animate.css"/>
+    <!-- element-ui -->
+    <link rel="stylesheet" href="../element-ui/index.css">
+    <script src="../element-ui/index.js"></script>
+    <script src="../../components/contextMenu/contextMenu.js"></script>
+    <link rel="stylesheet" href="../../components/contextMenu/contextMenu.css">
+    <link rel="stylesheet" href="../../css/yl-layer-skin.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../../css/animation.css">
+    <script src="../../yl.app.js"></script>
+    <!--图标模板-->
+    <script type="text/x-template" id="tpl-icon">
+        <div :class="[drawer?'icon-drawer-pre':'icon']" :style="{background:nobg?'none':icon.bg}">
+            <template v-if="icon.type==='str'">
+                {{icon.content.substr(0, 1)}}
+            </template>
+            <i v-if="icon.type==='fa'" class="fa fa-fw"
+               :class="[ 'fa-'+icon.content ]">
+            </i>
+            <template v-if="icon.type==='img'">
+                <img ondragstart="return false;" class="fa" :src="img?img:icon.content"/>
+            </template>
+            <div class="badge" v-show="badge">{{badgeText(badge)}}</div>
+        </div>
+    </script>
+    <script src="../../js/yl-vue-component-icon.js"></script>
+</head>
+<body>
+<div id="app" :class="{'small-screen':isSmallScreen}">
+    <div class="tab-title"><i class="fa fa-gear fa-fw"></i> {{YL.lang("SystemOptions")}}</div>
+    <div class="tab-left">
+        <ul class="tab-nav">
+            <li v-for="(nav,id) in navs"
+                @click="if(!nav.disable) navActive=id"
+                :style="navStyle(id)"
+                :class="{active:id===navActive,disable:nav.disable}">
+                <i class="fa fa-fw" :class="[ 'fa-'+nav.icon ]"></i>{{nav.text}}
+            </li>
+        </ul>
+    </div>
+    <div class="tab-right" :class="{active:'app-manager'===navActive}">
+        <div class="show">
+            <h1>{{YL.lang('AppManager')}}</h1>
+            <div id="app-manager">
+                <div>
+                    <input style="padding: 0.5em; width: calc(100% - 7.5em);margin-bottom: 1em; max-width: 36em;outline: none"
+                           v-model="appSearchWords"
+                           :placeholder="YL.lang('Search')+'/'+YL.lang('Create')+' '+YL.lang('Application')+'...'"/>
+                    <el-button @click="appCreate(appSearchWords)" type="primary" size="small" icon="el-icon-plus" >{{YL.lang('Application')}}</el-button>
+                    <table class="list" style="table-layout: fixed;width: 100%">
+                        <tr class="item">
+                            <td class="text" width="120" style="font-weight: bold">{{YL.lang('Application')}}</td>
+                            <td class="text" width="120" style="font-weight: bold">ID</td>
+                            <td class="text" width="110" style="font-weight: bold">{{YL.lang('Description')}}</td>
+                            <td class="text" width="50" style="font-weight: bold">{{YL.lang('Copyright')}}</td>
+                            <td class="text" width="40" style="font-weight: bold">{{YL.lang('AutoRun')}}</td>
+                        </tr>
+                        <tr v-for="(app,id) in apps" class="item"
+                            v-show="appSearchMatch(id)"
+                            @contextMenu="appContextMenu(id,$event)">
+                            <td class="text title" @dblclick="appSetting=app">
+                                <yl-icon :icon="app.icon" :img="urlFix(app.icon.content)"></yl-icon>
+                                <span style="padding-left: 0.5em" :title="app.title">{{app.title}}</span>
+                            </td>
+                            <td class="text" :title="id">{{id}}</td>
+                            <td class="text" :title="app.desc?app.desc:YL.lang('NoMoreDescription')">{{app.desc?app.desc:YL.lang('NoMoreDescription')}}</td>
+                            <td class="text" :title="app.poweredBy">{{app.poweredBy}}</td>
+                            <td class="text">{{renderAutoRun(app.autoRun)}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--抽屉渲染-->
+            <transition name="opacity">
+                <div class="shader" v-if="appSetting" @click.self="appSetting=null"
+                     style="z-index:1">
+                    <div class="drawer">
+                        <el-form ref="form" :label-position="isSmallScreen?'top':'left'" :model="appSettingForm" label-width="8em" size="mini"
+                                 style="padding:1em ;overflow: auto;height: calc(100% - 2em);">
+                            <el-form-item :label="YL.lang('Title')">
+                                <el-input spellcheck="false" v-model="appSetting.title" size="mini"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Version')">
+                                <el-input spellcheck="false" v-model="appSetting.version" size="mini"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Description')">
+                                <el-input spellcheck="false" v-model="appSetting.desc" size="mini"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Copyright')">
+                                <el-input spellcheck="false" v-model="appSetting.poweredBy" size="mini"></el-input>
+                            </el-form-item>
+                            <el-form-item label="URL">
+                                <el-input spellcheck="false" v-model="appSetting.url" size="mini" :placeholder="YL.lang('CanBeEmpty')"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Tile')+' '+'URL'">
+                                <el-input spellcheck="false" v-model="appSetting.customTile" size="mini" :placeholder="YL.lang('CanBeEmpty')"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('OpenMode')">
+                                <el-select v-model="appSetting.openMode" :placeholder="YL.lang('PleaseChoose')" size="mini">
+                                    <el-option :label="YL.lang('Normal')" value="normal"></el-option>
+                                    <el-option :label="YL.lang('Maximize')" value="max"></el-option>
+                                    <el-option :label="YL.lang('Minimize')" value="min"></el-option>
+                                    <el-option :label="YL.lang('Outer')" value="outer"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('IconType')">
+                                <el-select v-model="appSetting.icon.type" :placeholder="YL.lang('PleaseChoose')" size="mini">
+                                    <el-option label="FontAwesome" value="fa"></el-option>
+                                    <el-option :label="YL.lang('Initial')" value="str"></el-option>
+                                    <el-option :label="YL.lang('Image')" value="img"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('IconContent')">
+                                <el-input spellcheck="false" v-model="appSetting.icon.content" size="mini"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('IconBgColor')">
+                                <el-row>
+                                    <el-col :span="2">
+                                        <div @click="YL.open('yl-color-picker',{data:{color:appSetting.icon.bg,parent:YLApp.id}})" :style="{background:appSetting.icon.bg}" style="width: 90%;height: 27px;margin-top: 1px;border-radius: 3px;box-sizing: border-box;border: 1px solid darkgray;">&nbsp;</div>
+                                    </el-col>
+                                    <el-col :span="22">
+                                        <el-input spellcheck="false" v-model="appSetting.icon.bg" size="mini" style="width:147px" :placeholder="YL.lang('LegalCSSColor')"></el-input>
+                                    </el-col>
+                                </el-row>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('AutoRun')">
+                                <el-button-group>
+                                    <el-button @click="reduceAutoRunLevel(appSetting)"  plain icon="el-icon-remove" size="mini">{{YL.lang('Degrade')}}</el-button>
+                                    <el-button plain size="mini">{{YL.lang('Current')}}:{{renderAutoRun(appSetting.autoRun)}}</el-button>
+                                    <el-button @click="increaseAutoRunLevel(appSetting)" plain icon="el-icon-circle-plus" size="mini">{{YL.lang('Upgrade')}}</el-button>
+                                </el-button-group>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Superscript')">
+                                <el-input-number v-model="appSetting.badge"  size="mini" :min="0" :max="999"></el-input-number>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Position')+' - '+YL.lang('AutoOffset')">
+                                <el-switch
+                                        style="display: block;position: relative;top: 4px;width: 40px;"
+                                        v-model="appSetting.position.autoOffset"
+                                        inactive-color="gray">
+                                </el-switch>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Position')+' - '+YL.lang('LateralAlignment')">
+                                <el-switch
+                                        v-model="appSetting.position.left"
+                                        :active-text="YL.lang('AlignLeft')"
+                                        :inactive-text="YL.lang('AlignRight')"
+                                        inactive-color="#409EFF">
+                                </el-switch>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Position')+' - '+YL.lang('VerticalAlignment')">
+                                <el-switch
+                                        v-model="appSetting.position.top"
+                                        :active-text="YL.lang('AlignTop')"
+                                        :inactive-text="YL.lang('AlignBottom')"
+                                        inactive-color="#409EFF">
+                                </el-switch>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Position')+' - '+YL.lang('LateralOffset')">
+                                <el-input v-model="appSetting.position.x" size="mini"
+                                          :placeholder="YL.lang('TipsOfSizeSetting')"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Position')+' - '+YL.lang('VerticalOffset')">
+                                <el-input v-model="appSetting.position.y" size="mini"
+                                          :placeholder="YL.lang('TipsOfSizeSetting')"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Size')+' - '+YL.lang('Width')">
+                                <el-input v-model="appSetting.size.width" size="mini"
+                                          :placeholder="YL.lang('TipsOfSizeSetting')"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('Size')+' - '+YL.lang('Height')">
+                                <el-input v-model="appSetting.size.height" size="mini"
+                                          :placeholder="YL.lang('TipsOfSizeSetting')"></el-input>
+                            </el-form-item>
+                            <el-form-item :label="YL.lang('DisplayMode')">
+                                <el-row>
+                                <el-col :span="12">
+                                    <el-switch
+                                            v-model="appSetting.plugin"
+                                            :active-text="YL.lang('PluginMode')"
+                                            inactive-color="gray">
+                                    </el-switch>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-switch
+                                            v-model="appSetting.single"
+                                            :active-text="YL.lang('SingleWindow')"
+                                            inactive-color="gray">
+                                    </el-switch>
+                                </el-col>
+                                </el-row>
+                                <el-row>
+                                <el-col :span="12">
+                                    <el-switch
+                                            v-model="appSetting.addressBar"
+                                            :active-text="YL.lang('DisplayAddressBar')"
+                                            inactive-color="gray">
+                                    </el-switch>
+                                </el-col>
+                                <el-col :span="12">
+                                    <el-switch
+                                            v-model="appSetting.background"
+                                            :active-text="YL.lang('BackMode')"
+                                            inactive-color="gray">
+                                    </el-switch>
+                                </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="12">
+                                        <el-switch
+                                                v-model="appSetting.resizable"
+                                                :active-text="YL.lang('Resizable')"
+                                                inactive-color="gray">
+                                        </el-switch>
+                                    </el-col>
+                                    <el-col :span="12">
+
+                                    </el-col>
+                                </el-row>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </div>
+            </transition>
+        </div>
+    </div>
+    <div class="tab-right" :class="{active:'colors'===navActive}">
+        <div class="show" id="colors">
+            <h1>{{YL.lang('Color')}}</h1>
+            <div class="color-choose">
+                <div v-for="color in colors" class="color-block"
+                     @click="colorChoose=color"
+                     :style="{'background-color': color}"></div>
+            </div>
+            <div>
+                <div @click="YL.open('yl-color-picker',{data:{color:colorChoose,parent:YLApp.id}})" style="float: left;margin-right:1em;width:4em;height:calc(2em + 2px);"
+                     :style="{'background-color': colorChoose}"></div>
+                <input style="width:103px;margin-right: 20px;float: left;padding: 0.5em;outline: none;"
+                       :disabled="autoThemeColor" v-model="colorChoose"/>
+                <el-switch
+                        style="display: block;position: relative;top: 4px;float: left;width: 200px;"
+                        v-model="autoThemeColor"
+                        :active-text="YL.lang('PickFromBgAuto')"
+                        inactive-color="gray">
+                </el-switch>
+            </div>
+        </div>
+    </div>
+    <div class="tab-right" :class="{active:'wallpaper'===navActive}">
+        <div class="show">
+            <h1>{{YL.lang('Wallpaper')}}</h1>
+            <img id="img-wallpaper-preview" width="336" height="185" onerror="this.src='./error.png'" :src="wallpaperNowFixed"/>
+            <div>
+                <el-switch
+                        style=""
+                        v-model="wallpaperBlur"
+                        :active-text="YL.lang('Blur')"
+                        inactive-color="gray">
+                </el-switch>
+                <el-switch
+                        style="margin-left: 20px"
+                        v-model="wallpaperSlide"
+                        :active-text="YL.lang('Slide')"
+                        inactive-color="gray">
+                </el-switch>
+            </div>
+            <div v-show="wallpaperSlide">
+                <div style="margin-top: 20px">
+                    <el-radio-group v-model="wallpaperSlideRandom" size="small">
+                        <el-radio-button :label="false">{{YL.lang('PlaySequentially')}}</el-radio-button>
+                        <el-radio-button :label="true">{{YL.lang('PlayRandomly')}}</el-radio-button>
+                    </el-radio-group>
+                </div>
+                <div style="margin-top: 20px">
+                    {{YL.lang('SwitchingFrequency')}}
+                    <el-select v-model="wallpaperSlideItv" size="small" :placeholder="YL.lang('PleaseChoose')">
+                        <el-option :label="'6 '+YL.lang('Minutes')" :value="1"></el-option>
+                        <el-option :label="'10 '+YL.lang('Minutes')" :value="10"></el-option>
+                        <el-option :label="'30 '+YL.lang('Minutes')" :value="30"></el-option>
+                        <el-option :label="'1 '+YL.lang('Hours')" :value="60"></el-option>
+                        <el-option :label="'6 '+YL.lang('Hours')" :value="360"></el-option>
+                        <el-option :label="'24 '+YL.lang('Hours')" :value="1440"></el-option>
+                    </el-select>
+                </div>
+            </div>
+            <p>
+                <input class="ipt-yl" v-model="wallpaperAddUrl" :placeholder="YL.lang('AddPictureOnline')"/>
+                <el-button @click="btnAddBgClick" size="medium"
+                           style="width: 81px;border-radius: inherit;font-size: 12px;">{{YL.lang('Add')}}
+                </el-button>
+            </p>
+
+            <div class="img-bg-preview">
+                <img v-for="bg in wallpapers"
+                     :style="{'border-color':themeColorNow}"
+                     @click="YL.vue.configs.wallpaper=bg.image"
+                     onerror="this.src='./error.png'"
+                     @contextMenu="imgContextMenu(bg,$event)"
+                     :src="urlFix(bg.preview?bg.preview:bg.image)"/>
+            </div>
+        </div>
+    </div>
+    <div class="tab-right" :class="{active:'data-manage'===navActive}">
+        <div class="show">
+            <h1>{{YL.lang('DataManager')}}</h1>
+            <div style="min-width: 250px;overflow-x: hidden">
+                <el-button-group>
+                    <el-button plain :type="dataChanged?'primary':''" size="small" @click="layer.msg(YL.lang('DataHasBeenRefreshed'), {icon: 1});refreshData();" icon="el-icon-refresh"><span class="small-screen-hidden">{{YL.lang('Refresh')}}</span></el-button>
+                    <el-button plain size="small" @click="enableData" :loading="btnEnableLoading" icon="el-icon-sort"><span class="small-screen-hidden">{{YL.lang('TakeEffect')}}</span></el-button>
+                    <el-button plain size="small" @click="btnClipboard" icon="el-icon-tickets"><span class="small-screen-hidden">{{YL.lang('Copy')}}</span></el-button>
+                    <el-button plain size="small" @click="$('#ipt-json-file').click()" icon="el-icon-upload2"><input type="file"
+                                                                                                               @change="jsonImport"
+                                                                                                               id="ipt-json-file"/><span class="small-screen-hidden">{{YL.lang('Import')}}</span></el-button>
+                    <el-button plain size="small" @click="jsonExport" icon="el-icon-download"><span class="small-screen-hidden">{{YL.lang('Export')}}</span></el-button>
+                </el-button-group>
+            </div>
+            <textarea style="margin: 5px 0 " id="text-data" v-model="textData" spellcheck="false"></textarea>
+        </div>
+    </div>
+    <div class="tab-right" :class="{active:'others'===navActive}">
+        <div class="show">
+            <h1>{{YL.lang('Others')}}</h1>
+            <p>
+                <el-switch
+                        v-model="topTaskBar"
+                        :active-text="YL.lang('TopTaskBar')"
+                        inactive-color="gray">
+                </el-switch>
+            </p>
+            <p>
+                <el-switch
+                        v-model="highPerformance"
+                        :active-text="YL.lang('HighPerformance')"
+                        inactive-color="gray">
+                </el-switch>
+            </p>
+            <p>
+                <el-switch
+                        v-model="highPerformanceOnMobile"
+                        :active-text="YL.lang('HighPerformance')+'('+YL.lang('MobileScreen')+')'"
+                        inactive-color="gray">
+                </el-switch>
+            </p>
+            <div style="margin-top: 20px">
+                {{YL.lang('MaxNumberOfWindows')}}
+                <el-select v-model="openMax" size="small" :placeholder="YL.lang('PleaseChoose')">
+                    <el-option label="6" :value="6"></el-option>
+                    <el-option label="9" :value="9"></el-option>
+                    <el-option label="12" :value="12"></el-option>
+                    <el-option label="15" :value="15"></el-option>
+                    <el-option label="18" :value="18"></el-option>
+                </el-select>
+            </div>
+        </div>
+    </div>
+    <div class="tab-right" :class="{active:'YLUI'===navActive}">
+        <div class="show">
+            <h1>YLUI</h1>
+            <div style="margin: 15px auto;" :style="{color:themeColorNow,'font-size':isSmallScreen?'22px':'68px'}">
+                <i class=" fa " :class="[ 'fa-'+YL.info.iconBtnStart ]"></i> {{YL.info.softwareName}}
+            </div>
+            <table class="tb-about-us">
+                <tr>
+                    <td :width="isSmallScreen?'100':'150'">{{YL.lang('Version')}}</td>
+                    <td>{{YL.info.version}}</td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('Authorization')}}</td>
+                    <td>{{YL.static.authorization}}</td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('SerialNumber')}}</td>
+                    <td>{{YL.static.serialNumber}}</td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('Author')}}</td>
+                    <td>{{YL.info.author}}</td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('Contact')}}</td>
+                    <td>{{YL.info.contactInformation}}</td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('OfficialWebsite')}}</td>
+                    <td>
+                        <a style="text-decoration: underline;cursor: pointer" onclick="YLApp.open(YL.info.officialWebsite)">{{YL.info.officialWebsite}}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('Copyright')}}</td>
+                    <td style="font-size: 12px">{{YL.info.copyrightDetail}}</td>
+                </tr>
+                <tr v-if="YL.static.others">
+                    <td>{{YL.lang('OtherStatements')}}</td>
+                    <td style="font-size: 12px">{{YL.info.otherStatements}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="tab-right" :class="{active:'aboutUs'===navActive}">
+        <div class="show">
+            <h1>{{YL.lang('AboutUs')}}</h1>
+            <div style="margin: 15px auto;" :style="{color:themeColorNow,'font-size':isSmallScreen?'22px':'68px'}">
+                <i class=" fa " :class="[ 'fa-'+YL.static.iconBtnStart ]"></i> {{YL.static.softwareName}}
+            </div>
+            <table class="tb-about-us">
+                <tr>
+                    <td :width="isSmallScreen?'100':'150'">{{YL.lang('Version')}}</td>
+                    <td>{{YL.static.version}}</td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('Author')}}</td>
+                    <td>{{YL.static.author}}</td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('Contact')}}</td>
+                    <td>{{YL.static.contactInformation}}</td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('OfficialWebsite')}}</td>
+                    <td>
+                        <a style="text-decoration: underline;cursor: pointer" onclick="YLApp.open(YL.static.officialWebsite)">{{YL.static.officialWebsite}}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{YL.lang('Copyright')}}</td>
+                    <td style="font-size: 12px">{{YL.static.copyrightDetail}}</td>
+                </tr>
+                <tr v-if="YL.static.others">
+                    <td>{{YL.lang('OtherStatements')}}</td>
+                    <td style="font-size: 12px">{{YL.static.otherStatements}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="./index.js"></script>
+</body>
+</html>

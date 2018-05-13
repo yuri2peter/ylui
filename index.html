@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>...</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="./res/css/loading.css"/>
+    <script src="res/yl.js"></script>
+    <script src="onLoad.js"></script>
+</head>
+<body style="padding: 0;margin: 0;background: black">
+<div id="loading">
+    <div class="box" id="loading-box">
+        <p class="title"><span id="loading-software-name"></span> <span id="loading-lang-init"></span></p>
+        <p id="on-load-file-name">...</p>
+        <div class="circle-box">
+            <div class="circle"></div>
+            <div id="text-percent">0</div>
+            <div class="mask right">
+                <div id="loading-right" class="circle right"></div>
+            </div>
+            <div class="mask left">
+                <div id="loading-left" class="circle left"></div>
+            </div>
+        </div>
+    </div>
+    <p id="loading-powered-by"></p>
+</div>
+<!--图标模板-->
+<script type="text/x-template" id="tpl-icon">
+    <div :class="[drawer?'icon-drawer-pre':'icon']" :style="{background:nobg?'none':icon.bg}">
+        <template v-if="icon.type==='str'">
+            {{icon.content.substr(0, 1)}}
+        </template>
+        <i v-if="icon.type==='fa'" class="fa fa-fw"
+           :class="[ 'fa-'+icon.content ]">
+        </i>
+        <template v-if="icon.type==='img'">
+            <img ondragstart="return false;" class="fa" :src="img?img:icon.content"
+                 onerror="this.src='./res/img/icon/error.png'"/>
+        </template>
+        <div class="badge" v-show="badge">{{badgeText(badge)}}</div>
+    </div>
+</script>
+
+<!--菜单模板-->
+<script type="text/x-template" id="tpl-menu">
+    <div class="menu" @contextmenu.self="onMainContextMenu($event)">
+        <yl-menu-item
+                v-for="(item, id) in menu"
+                :open="true"
+                :item="item"
+                :itemid="id"
+                :depth="0"
+                @itemclick="onItemClick($event)"
+                @itemcontextmenu="onItemContextMenu($event)"
+                :apps="apps">
+        </yl-menu-item>
+    </div>
+</script>
+<script type="text/x-template" id="tpl-menu-item">
+    <div>
+        <div class="item"
+             @contextmenu="onContextMenu($event)"
+             :class="{open:open}" @click="click">
+            <span :style="{'margin-left':depth*15+'px'}"></span>
+            <yl-icon v-if="!item.children" :icon="apps[item.app].icon"></yl-icon>
+            <div v-else class="icon-drawer">
+                <template v-for="(c1, id1) in item.children">
+                    <yl-icon v-if="!c1.children" :icon="apps[c1.app].icon" :badge="0" class="icon-drawer-pre"
+                             :drawer="true"></yl-icon>
+                </template>
+            </div>
+            <span class="title">{{item.title}}</span>
+            <div v-if="item.children" class="arrow" :class="{open:item.open}">
+                <i class="fa fa-fw fa-angle-up"></i>
+                <i class="fa fa-fw fa-angle-down"></i>
+            </div>
+        </div>
+        <yl-menu-item
+                v-if="item.children"
+                v-for="(subItem, subId) in item.children"
+                :item="subItem"
+                :itemid="subId"
+                :depth="depth+1"
+                :open="item.open&&open"
+                @itemclick="onItemClick($event)"
+                @itemcontextmenu="onItemContextMenu($event)"
+                :apps="apps">
+        </yl-menu-item>
+    </div>
+</script>
+<div id="yl" :class="{'small-screen':runtime.isSmallScreen,'horizontal-screen':runtime.isHorizontalScreen}"
+     style="display: none;opacity: 0" unselectable="on"
+     v-show="ready">
+    <!--桌面 图标 抽屉 窗体-->
+    <div class="desktop "
+         :style="{top:configs.topTaskBar?40+'px':0}">
+        <!--图标-->
+        <div class="shortcut " :class="shortcutClass(id,s)" v-for="(s, id) in shortcuts"
+             :key="id"
+             @mousedown="shortcutMouseDown(id,null, $event)"
+             @touchstart="shortcutMouseDown(id,null, $event)"
+             v-show="runtime.shortcutsShow&&!startMenu.open"
+             @contextMenu="shortcutContextMenu(id,null,$event)"
+             :title="s.title"
+             :style="shortcutStyle(id,null)">
+            <yl-icon v-if="!s.children" :icon="apps[s.app].icon" :badge="apps[s.app].badge"></yl-icon>
+            <div class="icon-drawer" v-if="s.children">
+                <template v-for="(s1, id1) in s.children">
+                    <yl-icon :icon="apps[s1.app].icon" :badge="0" class="icon-drawer-pre"
+                             :drawer="true"></yl-icon>
+                </template>
+                <div class="badge" v-show="shortcutGetDrawerBadge(id)">{{badgeText(shortcutGetDrawerBadge(id))}}</div>
+            </div>
+            <div class="title">
+                {{s.title}}
+            </div>
+        </div>
+
+        <!--抽屉渲染-->
+        <transition name="opacity">
+            <div class="shader " v-if="shortcuts[drawer]"
+                 @mousedown.self="drawer=null"
+                 style="z-index:999999">
+                <div class="drawer shadow">
+                    <div class="mask"
+                         :style="{background:configs.themeColor,opacity:lowEffect?1:0.6}"></div>
+                    <div class="title">{{shortcuts[drawer].title}}</div>
+                    <div class="shortcut" v-for="(s, id) in shortcuts[drawer].children"
+                         :class="shortcutClass(id,s,true)"
+                         @mousedown="shortcutMouseDown(id,drawer, $event)"
+                         @touchstart="shortcutMouseDown(id,drawer, $event)"
+                         @contextMenu="shortcutContextMenu(id,drawer,$event,true)"
+                         :title="s.title" :style="{left:s.drag.left+'px',top:s.drag.top+'px'}">
+                        <yl-icon v-if="!s.drawer" :icon="apps[s.app].icon" :badge="apps[s.app].badge"></yl-icon>
+                        <div class="title">
+                            {{s.title}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+
+        <!--窗体渲染-->
+        <transition-group name="opacity">
+            <div v-for="(w,id) in wins" class="win shadow" :key="id"
+                 :id="id"
+                 v-show="!winIsMin(id)&&(w.plugin||!boxOpen)"
+                 @mousedown="winSetActive(id)"
+                 :class="winClass(id)"
+                 :style="winStyle(id)">
+                <div v-if="!w.plugin&&w.init" class="init" :style="{'background-color':w.icon.bg}">
+                    <yl-icon :icon="w.icon" :badge="0" :style="winInitIconStyle(id)"></yl-icon>
+                </div>
+                <div class="bar-box" v-show="!w.init">
+                    <div class="bar" :class="{'no-max':w.plugin||!w.resizable}">
+                        <div class="mask bar-mask"></div>
+                        <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.9"></div>
+                        <!--标题栏-->
+                        <div class="title" :title="w.title"
+                             @contextMenu="winContextMenu(id,$event)"
+                             @dblclick="winTitleDblclick(id)"
+                             @mousedown="winTitleMouseDown(id,$event)"
+                             @touchstart="winTitleMouseDown(id,$event)">
+                            <yl-icon :icon="w.icon"></yl-icon>
+                            {{w.title}}
+                        </div>
+                        <div class="tools">
+                            <i class="tool iconfont icon-weibiaoti-3" @click="winMinimize(id)"></i>
+                            <i v-if="!w.plugin&&w.state==='normal'&&w.resizable&&!runtime.isSmallScreen"
+                               class="tool iconfont icon-weibiaoti-" style="font-size: 14px"
+                               @click="winMaximize(id)"></i>
+                            <i v-if="!w.plugin&&w.state==='max'&&!runtime.isSmallScreen"
+                               class="tool iconfont icon-weibiaoti-1"
+                               @click="winRestore(id)"></i>
+                            <i class="tool close iconfont icon-weibiaoti-2" @click="winClose(id)"></i>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                    <div v-show="w.addressBar" class="address-bar">
+                        <i class="btns fa fa-fw fa-arrow-left" :class="{disable:!YL.child.historyBackAvaliable(id)}"
+                           @click="YL.child.historyBack(id)"></i>
+                        <i class="btns fa fa-fw fa-arrow-right"
+                           :class="{disable:!YL.child.historyForwardAvaliable(id)}"
+                           @click="YL.child.historyForward(id)"></i>
+                        <i class="btns fa fa-fw fa-rotate-right"
+                           :class="{disable:!w.childSupport}"
+                           @click="!w.childSupport||winRefresh(id)"></i>
+                        <i class="btns fa fa-fw fa-home" @click="winHome(id)"></i>
+                        <input v-model="w.urlBar" spellcheck="false" @keyup.enter="w.url=w.urlBar">
+                    </div>
+                </div>
+
+                <div class="win-drag-placeholder">
+                    <div class="mask" style="z-index: 2" v-show="runtime.drag"></div>
+                    <iframe :id="w.idIframe" :name="id" class="frm"
+                            :src="w.url"></iframe>
+                    <div v-show="w.resizable" class="win-resize" @mousedown="winResizeMouseDown(id,$event)"></div>
+                    <div class="win-move"
+                         @contextMenu="winContextMenu(id,$event)"
+                         @mousedown="winTitleMouseDown(id,$event)"
+                         @touchstart="winTitleMouseDown(id,$event)"
+                    ></div>
+                </div>
+            </div>
+        </transition-group>
+        <!--背景图-->
+        <div class="background-mask " @click.self="desktopClick"
+             @contextMenu.self="desktopContextMenu"></div>
+        <div class="background"
+             :class="{blur:configs.wallpaperBlur||(!configs.highPerformance&&boxOpen)}"
+             :style="{'background-image':'url('+runtime.wallpaper+')'}"></div>
+    </div>
+
+    <!--任务栏-->
+    <div class="bar shadow" @contextMenu="barContextMenu" :style="barStyle" :class="{top:configs.topTaskBar}">
+        <div class="mask" style="background-color: black"></div>
+        <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.7"></div>
+        <!--开始按钮-->
+        <div class="btn shadow-hover fa fa-fw"
+             :class="[ 'fa-'+YL.info.iconBtnStart ]"
+             @click="if(startMenu.open){hideOpens();}else{hideOpens();startMenu.open=true} "></div>
+        <!--子窗口的按钮-->
+        <div class="btn win-task" @click="winTaskClick(id)"
+             :class="{active:id===runtime.winActive&&!winIsMin(id),shadow:id===runtime.winActive&&!winIsMin(id)}"
+             v-for="(w,id) in wins" v-if="!w.plugin" @contextMenu="winContextMenu(id,$event)"
+             :style="{'width':parseInt((runtime.clientSize.width-250+(runtime.isSmallScreen?80:0))/runtime.winOpened)+'px'}">
+            <yl-icon :icon="w.icon"></yl-icon>
+            <div class="title">{{w.title}}</div>
+            <div class="line"></div>
+        </div>
+        <!--显示桌面-->
+        <div id="yl-btn-right-bottom"
+             @click="if(smallScreenAndMenuOpend){runtime.menuOnLeft=!runtime.menuOnLeft} else {showDesktop()}"
+             :class="{'fa-exchange':smallScreenAndMenuOpend}"
+             class="btn shadow-hover fa fa-fw"></div>
+        <!--消息-->
+        <div id="yl-btn-center" class="btn shadow-hover fa fa-fw fa-comment-o" style="float: right"
+             @click="btnCenterClick()">
+            <div class="badge"
+                 :style="{bottom:configs.topTaskBar?'-18px':'none',top:configs.topTaskBar?'auto':'0'}"
+                 v-show="center.unread">{{center.unread>99?'99+':center.unread}}
+            </div>
+        </div>
+        <!--时间-->
+        <div class="btn shadow-hover" v-show="!runtime.isSmallScreen" v-html="runtime.time"
+             @click="runtime.CalendarOpen=!runtime.CalendarOpen;"
+             style="font-size: 12px;line-height: 20px;float: right"></div>
+        <!--托盘按钮-->
+        <div class="btn shadow-hover fa fa-fw "
+             :class="{'fa-angle-up':!configs.topTaskBar,'fa-angle-down':configs.topTaskBar}"
+             style="float: right;padding: 0"
+             @click="runtime.pluginIconsOpen=!runtime.pluginIconsOpen;"></div>
+        <!--插件托盘盒子-->
+        <transition name="opacity">
+            <div class="plugin-icons shadow" v-show="runtime.pluginIconsOpen">
+                <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.9"></div>
+                <div class="plugin-icon" @click="winShowToggle(id)"
+                     :class="{active:id===runtime.winActive&&!winIsMin(id)}"
+                     v-for="(w,id) in wins" v-if="w.plugin" @contextMenu="winContextMenu(id,$event)"
+                     :title="w.title"
+                     :style="{opacity:winIsMin(id)?0.2:1}">
+                    <yl-icon :icon="w.icon"></yl-icon>
+                </div>
+            </div>
+        </transition>
+        <!--日历盒子-->
+        <transition name="opacity">
+            <div id="_box_time" @contextMenu="ContextMenu.render($event,true)" class="calendar-box shadow"
+                 v-show="runtime.CalendarOpen">
+                <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.9"></div>
+                <div class="_h_m_s div-time"></div>
+                <div class="_y_m_d div-time"></div>
+                <div class="calendar clearfix">
+                    <div class="_header">
+                        <strong></strong>
+                        <span class="aL"><</span>
+                        <span class="aR">></span>
+                    </div>
+                    <div class="_normal">
+                        <div class="_week clearfix"></div>
+                        <div class="_days clearfix">
+                            <ul class="clearfix"></ul>
+                        </div>
+                    </div>
+                    <div class='_years_months clearfix'>
+                        <ul></ul>
+                    </div>
+                    <div class="_tenyears clearfix">
+                        <ul></ul>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <!--开始菜单-->
+    <transition name="opacity">
+        <div class="startMenu"
+             @click="center.open = false;runtime.pluginIconsOpen = false;runtime.CalendarOpen = false;"
+             v-show="startMenu.open"
+             :class="{topTaskBar:configs.topTaskBar,blur:shortSetting&&!lowEffect}">
+            <div class="mask"
+                 :style="{background:configs.themeColor,opacity:lowEffect?1:0.5}"></div>
+            <!--左侧边栏-->
+            <div class="sidebar" :class="{spread:startMenu.sidebar.open,'shadow-hover':startMenu.sidebar.open}"
+                 @mouseleave="startMenu.sidebar.open=false">
+                <div class="mask"
+                     :style="{'background-color': startMenu.sidebar.open?configs.themeColor:'transparent'}"></div>
+                <div @click="startMenu.sidebar.open=!startMenu.sidebar.open" class="btn">
+                    <i class="fa fa-fw fa-align-justify"></i><span class="title">{{YL.lang("Start")}}</span></div>
+                <div class="btn-group">
+                    <div v-for="(b, i) in startMenu.sidebar.btns" :title="b.title" class="btn"
+                         @contextMenu="sidebarBtnContextMenu(i,$event)"
+                         @click="appOpen(b.app,b,b)">
+                        <yl-icon :icon="apps[b.app].icon" :badge="apps[b.app].badge" :nobg="true"></yl-icon>
+                        <span class="title">{{b.title}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!--主菜单-->
+            <yl-menu
+                    :style="menuStyle"
+                    @maincontextmenu="menuMainContextMenu($event)"
+                    @itemcontextmenu="menuContextMenu($event)"
+                    @itemclick="menuItemClick($event)" :menu="startMenu.menu" :apps="apps">
+            </yl-menu>
+
+            <!--磁贴-->
+            <div class="tiles-box" @contextMenu="tilesBoxContextMenu($event)" :style="tilesBoxStyle">
+                <div class="tiles-flex-container" :style="{'column-count':runtime.tilesGroupNum}">
+                    <div class="tiles" :style="{width: runtime.tilesWidth+'px'}"
+                         v-for="(tileGroup,groupIndex) in tiles">
+                        <div class="title" @contextMenu="tilesTitleContextMenu(groupIndex,$event)">{{tileGroup.title}}
+                            <i @click="shortSetting=tileGroup" class="fa fa-navicon tip"></i>
+                        </div>
+                        <grid-layout
+                                :layout="tileGroup.data"
+                                :col-num="6"
+                                :row-height="runtime.tileSize"
+                                :is-draggable="true"
+                                :is-resizable="true"
+                                :vertical-compact="true"
+                                :margin="[4,4]"
+                                :use-css-transforms="false"
+                                :autoSize="false"
+                        >
+                            <grid-item v-for="(tile,i) in tileGroup.data"
+                                       @moved="tileMoved"
+                                       :x="tile.x"
+                                       :y="tile.y"
+                                       :w="tile.w"
+                                       :h="tile.h"
+                                       :i="tile.i">
+                                <div class="tile"
+                                     :title="tile.title"
+                                     @mousedown="tileMouseDown($event)"
+                                     @click="tileClick(tile)" @contextMenu="tileContextMenu(groupIndex,i,$event)">
+                                    <div class="mask" style="opacity:0.85"
+                                         :style="{'background-color':apps[tile.app].icon.bg}">
+                                        <div class="badge" v-show="apps[tile.app].badge">
+                                            {{badgeText(apps[tile.app].badge)}}
+                                        </div>
+                                        <iframe class="custom-tile" v-if="apps[tile.app].customTile"
+                                                frameborder="0" scrolling="no" hspace="0"
+                                                :src="YL.util.updateUrlRandomToken(apps[tile.app].customTile,'',runtime.customTileRandomToken)"></iframe>
+                                        <yl-icon v-else :icon="apps[tile.app].icon" :badge="0"
+                                                 :style="tileStyle(tile)"></yl-icon>
+                                        <div v-show="Math.min(tile.w,tile.h)*runtime.tileSize>80" class="title">
+                                            {{tile.title}}
+                                        </div>
+                                    </div>
+                                    <!--<div class="mask" style="opacity: 0.3;background-color: white"></div>-->
+                                </div>
+                            </grid-item>
+                        </grid-layout>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </transition>
+
+    <!--操作中心-->
+    <div class="center shadow" :class="{open:center.open}" :style="centerStyle">
+        <div class="mask"
+             :style="{background:configs.themeColor,opacity:lowEffect?1:0.6}"></div>
+        <div class="banner">{{YL.lang("NoticeCenter")}}
+            <div class="clear" v-show="center.msgNum>0" @click="btnCenterClear">{{YL.lang("NoticeClearAll")}}</div>
+        </div>
+        <transition
+                name="custom-classes-transition-msg"
+                enter-active-class="animated slideInRight"
+                leave-active-class="animated slideOutRight">
+            <div style="animation-duration: 0.5s" class="banner no-msg" v-show="center.msgNum<=0">
+                {{YL.lang("NoMoreNotice")}}
+            </div>
+        </transition>
+        <div class="msgs">
+            <transition-group
+                    name="custom-classes-transition-msg"
+                    enter-active-class="animated bounceInRight"
+                    leave-active-class="animated bounceOutRight">
+                <div v-for="(m,id) in center.msg" class="msg shadow-hover" :key="id">
+                    <div class="title">{{m.title}}
+                        <div class="btn-close" @click="msgClose(id)"><i class="fa fa-trash"></i></div>
+                    </div>
+                    <div class="content selectable" v-html="m.content"></div>
+                </div>
+            </transition-group>
+        </div>
+    </div>
+    <!--快捷方式配置-->
+    <transition name="opacity">
+        <div class="shader" v-if="shortSetting"
+             @click.self="shortSetting=null;runtime.shortcutNewParamName='',runtime.shortcutNewParamValue=''"
+             :style="{'z-index':19930005}">
+            <div class="drawer shadow">
+                <div class="mask"
+                     :style="{background:configs.themeColor,opacity:lowEffect?1:0.6}"></div>
+                <div class="title">{{shortSetting.title}}<span v-if="shortSetting.app" class="btn-advance"
+                                                               @click="btnShortSettingAdvanceClick(shortSetting.app)">{{YL.lang("Advance")}}</span>
+                </div>
+                <div class="line" :style="{'margin-top':shortSetting.params?0:'64px'}">
+                    <span>{{YL.lang("Title")}}</span> <input spellcheck="false" autofocus
+                                                             v-model="shortSetting.title"/>
+                </div>
+                <template v-if="shortSetting.params">
+                    <div class="line">
+                        <span>{{YL.lang("Hash")}}</span> <input spellcheck="false" v-model="shortSetting.hash"/>
+                    </div>
+                    <div class="line">
+                        <input spellcheck="false" :placeholder="YL.lang('Key')"
+                               v-model="runtime.shortcutNewParamName"/>
+                        <input spellcheck="false" :placeholder="YL.lang('Value')"
+                               v-model="runtime.shortcutNewParamValue"/>
+                        <i class="fa fa-plus-circle" @click="shortSettingParamsAdd"></i>
+                    </div>
+                    <div v-for="(val,name) in shortSetting.params"
+                         class="line">
+                        <span :title="name">{{name}}</span>
+                        <input spellcheck="false" v-model="shortSetting.params[name]"/>
+                        <i class="fa fa-minus-circle" @click="shortSettingParamsDelete(name)"></i>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </transition>
+    <!--消息预览-->
+    <transition-group
+            name="custom-classes-transition-msg"
+            enter-active-class="animated bounceInRight"
+            leave-active-class="animated bounceOutRight">
+        <div v-for="(msg,id) in msgPres" class="msg-attention animated" :key="msg.key"
+             @click="center.open = true"
+             :style="{bottom: msg.index*180+40+'px'}" v-if="msg">
+            <div class="mask" style="opacity: 0.7" :style="{background:configs.themeColor}"></div>
+            <div class="title">{{msg.title}}</div>
+            <div class="content selectable" v-html="msg.content"></div>
+        </div>
+    </transition-group>
+</div>
+</body>
+</html>

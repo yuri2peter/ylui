@@ -1,0 +1,91 @@
+#loading {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+#loading * {
+    text-align: center;
+}
+#loading .box{
+    /*border: 1px solid;*/
+    position: absolute;
+    width:400px;
+    height:200px;
+    left:50%;
+    top:50%;
+    margin-left:-200px;
+    margin-top:-200px;
+    display: none;
+    color: white;
+}
+#loading-powered-by{
+    width: 100%;
+    font-size: 12px;
+    color: grey;
+    text-align: center;
+    position: absolute;
+    bottom: 1em;
+}
+#loading .title {
+    font-size: 30px;
+}
+
+#on-load-file-name{
+    font-size: 16px;
+    color: grey;
+    line-height: 35px;
+}
+#text-percent{
+    font-size: 30px;
+    top: 83px;
+    position: absolute;
+    width: 100%;
+}
+.circle-box{
+    margin: 30px auto;
+    width: 200px;
+    height: 200px;
+    position: relative
+}
+.mask{
+    overflow: hidden;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+}
+.mask.right{
+    right: 0;
+}
+.mask.left{
+    left: 0;
+}
+.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1.5px solid #4e4e4e;
+    background-color: transparent;
+    overflow: hidden;
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    transition: all 0.5s ;
+}
+.circle.right{
+    clip:rect(0,auto,auto,100px);
+    border: 2px solid white;
+    transform: rotate(-180deg);
+    left: -100px;
+}
+.circle.left{
+    clip:rect(0,100px,auto,auto);
+    border: 2px solid white;
+    transform: rotate(-180deg);
+}
