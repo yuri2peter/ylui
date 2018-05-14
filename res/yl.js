@@ -1,15 +1,13 @@
 window.YL = {
     info: {
         softwareName: 'YLUI',
-        version: "2.0.0",
+        version: "2.0.1",
         iconBtnStart: 'yoast',
         author: 'Yuri2',
         contactInformation: 'yuri2peter@qq.com',
         officialWebsite: 'https://ylui.yuri2.cn',
         copyrightDetail: 'YLUI已授权本产品使用。YLUI禁止任何未经作者授权的使用、修改、二次发布，包括从本产品中剥离YLUI独立使用等侵权行为，违者将追究法律责任。',
         otherStatements: '',
-        authorization: '社区版',
-        serialNumber: '842381cf7c9b6be62cfe3865562c03f1',
     },
     data: {},
     lang: function (key) {

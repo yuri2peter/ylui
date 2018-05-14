@@ -420,6 +420,15 @@ YL.render = function (data) {
                     autoRun()
                 }
 
+                //社区版提示检测
+                if (first && !YL.static.serialNumber){
+                    YL.onReady(function () {
+                      setTimeout(function () {
+                        YL.msg("YLUI社区版",'当前YLUI为社区版，仅限个人用户学习使用，禁止商用及企业使用。<br/>更多信息及获取商业授权请访问:<br/>YLUI官网：'+'<a style="color: #2e8ded" target="_blank" href="https://ylui.yuri2.cn">https://ylui.yuri2.cn</a>');
+                      },1500)
+                    });
+                }
+
                 this.ready = true;
             },
             setWithID: function (obj, val, prefix,ran) {
