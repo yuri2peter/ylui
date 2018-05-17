@@ -1407,7 +1407,7 @@ YL.render = function (data) {
                         YL.util.getStrFa('sitemap') + YL.lang("UnGroup"),
                         function (v) {
                             s.children.forEach(function (t) {
-                                that.shortcuts.hideOpens(id + 1, 0, t);
+                                that.shortcuts.splice(id + 1, 0, t);
                             });
                             that.shortcuts.splice(id, 1);
                         }

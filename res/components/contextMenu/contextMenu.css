@@ -55,6 +55,7 @@ html, body {
     overflow: hidden;
     height: 100%;
     float: left;
+    word-break: break-all;
 }
 .yuri2-context-menu ul li div.title.disable {
     color: darkgrey;

@@ -1,5 +1,5 @@
 /**
- * contextMenu v2.2.2
+ * contextMenu v2.2.4
  * @author Yuri2(yuri2peter@qq.com)
  * @link https://github.com/yuri2peter/contextMenu
  * Enjoy! (●'◡'●)
