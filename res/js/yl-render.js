@@ -575,7 +575,7 @@ YL.render = function (data) {
                 win.style = Yuri2.jsonDeepCopy(win.style);//深拷贝对象
                 win.style.index = YL.util.getBiggerWinZIndex();
                 win.url = YL.util.urlParams(win.url, win.params, win.hash);
-                win.url = YL.util.updateUrlRandomToken(win.url);
+                if(win.urlRandomToken) win.url = YL.util.updateUrlRandomToken(win.url);
                 if (win.openMode === 'outer') {
                     //外部打开
                     window.open(win.url);
@@ -891,14 +891,20 @@ YL.render = function (data) {
             },
             winRefresh: function (id) {
                 var win = this.wins[id];
-                if (win)
-                    win.url = win.urlBar = YL.util.updateUrlRandomToken(win.urlBar);
-
+                var target = win.urlBar;
+                this.winJump(id, win.urlRandomToken?YL.util.updateUrlRandomToken(target):target);
             },
             winHome: function (id) {
-                //跳转到主页
                 var win = this.wins[id];
-                win.url = win.urlBar = YL.util.updateUrlRandomToken(win.urlOrigin);
+                var target = win.urlOrigin;
+                this.winJump(id, win.urlRandomToken?YL.util.updateUrlRandomToken(target):target);
+            },
+            winJump: function (id, url) {
+                var win = this.wins[id];
+                win.url = win.urlBar = 'about:blank';
+                setTimeout(function () {
+                    win.url = win.urlBar = url;
+                },200);
             },
             winContextMenu: function (id, e) {
                 var that = this;
@@ -1588,6 +1594,9 @@ YL.render = function (data) {
                 },!YL.static.changeable]);
                 menu.push(that.contextMenuUninstall(tile.app));
                 ContextMenu.render(e, menu, this);
+            },
+            tileSrcCustom: function (app){
+                return app.urlRandomToken?YL.util.updateUrlRandomToken(app.customTile,'',this.runtime.customTileRandomToken) :app.customTile;
             },
             menuContextMenu: function (data) {
                 var that = this;

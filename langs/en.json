@@ -172,6 +172,7 @@
   "UninstallConfirm": "Are you sure you want to uninstall the application ${0} ?",
   "UninstallFailed": "Uninstall failed.",
   "Upgrade": "Upgrade",
+  "UrlRandomToken": "URL Token",
   "Value": "Value",
   "Version": "Version",
   "VerticalAlignment": "Vertical Alignment",

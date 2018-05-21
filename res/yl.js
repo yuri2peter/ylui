@@ -703,6 +703,7 @@ window.YL = {
                 title: '',
                 url: "",
                 customTile: "",
+                urlRandomToken: true,
             };
         },
         getAppByWinId:function (winId) {

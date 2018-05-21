@@ -172,6 +172,7 @@
   "UninstallConfirm": "您确定要卸载应用 ${0} 吗？",
   "UninstallFailed": "卸载失败。",
   "Upgrade": "升级",
+  "UrlRandomToken": "URL随机TOKEN",
   "Value": "键值",
   "Version": "版本",
   "VerticalAlignment": "垂直对齐",

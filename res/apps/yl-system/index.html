@@ -10,7 +10,6 @@
     <script src="../../components/clipboard-polyfill.js"></script>
     <script src="../../components/layer-v3.0.3/layer/layer.full.js"></script>
     <link type="text/css" rel="stylesheet" href="../../components/font-awesome-4.7.0/css/font-awesome.min.css"/>
-    <link type="text/css" rel="stylesheet" href="../../components/animate.css"/>
     <!-- element-ui -->
     <link rel="stylesheet" href="../element-ui/index.css">
     <script src="../element-ui/index.js"></script>
@@ -18,7 +17,6 @@
     <link rel="stylesheet" href="../../components/contextMenu/contextMenu.css">
     <link rel="stylesheet" href="../../css/yl-layer-skin.css">
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="../../css/animation.css">
     <script src="../../yl.app.js"></script>
     <!--图标模板-->
     <script type="text/x-template" id="tpl-icon">
@@ -226,7 +224,11 @@
                                         </el-switch>
                                     </el-col>
                                     <el-col :span="12">
-
+                                        <el-switch
+                                                v-model="appSetting.urlRandomToken"
+                                                :active-text="YL.lang('UrlRandomToken')"
+                                                inactive-color="gray">
+                                        </el-switch>
                                     </el-col>
                                 </el-row>
                             </el-form-item>
