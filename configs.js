@@ -10,6 +10,7 @@ YL.static = {
     otherStatements: '',//其他信息（可留空）
 
     /**————————————————————————————————————————————————————————————————————————————————————————————*/
+    // lang:'zh-cn', //语言
     lang:'zh-cn', //语言
     localStorageName:"ylui-storage", //ls存储名
     lockedApps:['yl-system','yl-color-picker','yl-browser','yl-server'],

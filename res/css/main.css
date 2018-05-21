@@ -34,16 +34,17 @@ body {
 
 
 #yl .shadow {
-    box-shadow: rgba(7, 7, 7, 0.2) 0px 0px 20px 2px
+    /*box-shadow: rgba(7, 7, 7, 0.2) 0px 0px 20px 2px*/
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 20px 2px
 }
 #yl .shadow-inside{
-    box-shadow: inset rgba(7, 7, 7, 0.2) 0px 0px 20px 2px
+    box-shadow: inset rgba(0, 0, 0, 0.3) 0px 0px 20px 2px
 }
 #yl .shadow-hover:hover {
-    box-shadow: rgba(7, 7, 7, 0.2) 0px 0px 20px 2px
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 20px 2px
 }
 #yl .shadow-inside-hover:hover{
-    box-shadow: inset rgba(7, 7, 7, 0.2) 0px 0px 20px 2px
+    box-shadow: inset rgba(0, 0, 0, 0.3) 0px 0px 20px 2px
 }
 #yl .mask {
     position: absolute;

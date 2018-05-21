@@ -18,6 +18,9 @@ window.ContextMenu={
         e.stopImmediatePropagation();
         e.stopPropagation();
     },
+    _getMainContent:function(text){
+        return text.replace(/<\/?.+?>/g,"");
+    },
     render:function (e, menu, trigger,theme) {
         theme||(theme='');
         var x=e.clientX,y=e.clientY;
@@ -34,10 +37,10 @@ window.ContextMenu={
                 ul.append($('<hr/>'));
             }
             else if(typeof(item)==='string'){
-                ul.append($('<li><div class="title">'+item+'</div></li>'));
+                ul.append($('<li><div class="title" title="'+ContextMenu._getMainContent(item)+'">'+item+'</div></li>'));
             }
             else if(typeof(item)==='object'){
-                var sub=$('<li><div class="title '+(item[2]===true?'disable':'')+'">'+item[0]+'</div></li>');
+                var sub=$('<li><div class="title '+(item[2]===true?'disable':'')+'" title="'+ContextMenu._getMainContent(item[0])+'">'+item[0]+'</div></li>');
                 ul.append(sub);
                 if(typeof(item[1])==='object'){
                     var subMenu=$("<div class='sub "+ContextMenu._className+" "+theme+"'>\</div>");
@@ -46,22 +49,28 @@ window.ContextMenu={
                     subMenu.append(subUl);
                     if(x+300>document.body.clientWidth){subMenu.addClass('left')}
                     sub.append(subMenu);
+                    var counterForTop = -1;
                     item[1].forEach(function (t) {
                         if(t==='|'){
                             subUl.append($('<hr/>'));
                         }
                         else if(typeof(t)==='string'){
-                            subUl.append($('<li><div class="title">'+t+'</div></li>'));
+                            subUl.append($('<li><div class="title" title="'+ContextMenu._getMainContent(t)+'">'+t+'</div></li>'));
+                            counterForTop++;
                         }
                         else if(typeof(t)==='object'){
-                            var subLi=$('<li><div class="title '+(t[2]===true?'disable':'')+'">'+t[0]+'</div></li>');
+                            var subLi=$('<li><div class="title '+(t[2]===true?'disable':'')+'" title="'+ContextMenu._getMainContent(t[0])+'">'+t[0]+'</div></li>');
                             subUl.append(subLi);
                             if(t[2]!==true){
                                 subLi.click(trigger,t[1]);
                                 subLi.click(function () {ContextMenu._removeContextMenu();});
                             }
+                            counterForTop++;
                         }
-                    })
+                    });
+                    if(y+dom.height()>document.body.clientHeight && document.body.clientHeight>0){
+                        subMenu.css('top','-'+(counterForTop*30)+'px')
+                    }
                 }
                 else if(typeof(item[1])==='function' &&item[2]!==true){
                     sub.click(trigger,item[1]);

@@ -36,7 +36,7 @@ html, body {
 .yuri2-context-menu ul {
     margin: 0px;
     padding: 0px;
-    box-shadow: 0 0 16px #555;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.54);
 }
 
 .yuri2-context-menu ul li {
