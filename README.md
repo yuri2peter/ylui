@@ -42,7 +42,7 @@ YLUI是一款纯前端框架，是对WEB桌面UI的一个大胆尝试。
 
 ### 相关链接
 
-[YLUI官网](https://ylui.yuri2.cn) | [码外社区](http://www.bycodes.net/) | [官方交流群](https://jq.qq.com/?_wv=1027&k=5fAsios)
+[YLUI官网](https://ylui.yuri2.cn) | [GITHUB](https://github.com/yuri2peter/ylui) | [码外社区](http://www.bycodes.net/) | [官方交流群](https://jq.qq.com/?_wv=1027&k=5fAsios)
 
 ------------------------------------
 ## 开发记录
@@ -62,8 +62,10 @@ YLUI是一款纯前端框架，是对WEB桌面UI的一个大胆尝试。
 * 关于界面，分离YLUI的介绍
 * 合并小文件
 * 菜单项文字溢出
+* 壁纸模糊时拖动卡顿
 
 ### 日志
+* 180517 2.0.3 减少postMessage的频率，优化导航栏样式
 * 180517 2.0.2 修复图标组不能解散的bug；修改英文菜单溢出的bug（litins）
 * 180514 删除demo APP；添加社区版的提示信息；
 * 180430 细节优化，冗余清理;优化child的api；关于界面，分离YLUI的介绍；

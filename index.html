@@ -216,8 +216,8 @@
 
     <!--任务栏-->
     <div class="bar shadow" @contextMenu="barContextMenu" :style="barStyle" :class="{top:configs.topTaskBar}">
-        <div class="mask" style="background-color: black"></div>
-        <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.7"></div>
+        <div class="mask" style="background-color: rgba(0,0,0,0.55)"></div>
+        <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.5"></div>
         <!--开始按钮-->
         <div class="btn shadow-hover fa fa-fw"
              :class="[ 'fa-'+YL.info.iconBtnStart ]"

@@ -424,7 +424,7 @@ YL.render = function (data) {
                 if (first && !YL.static.serialNumber){
                     YL.onReady(function () {
                       setTimeout(function () {
-                        YL.msg("YLUI社区版",'当前YLUI为社区版，仅限个人用户学习使用，禁止商用及企业使用。<br/>更多信息及获取商业授权请访问:<br/>YLUI官网：'+'<a style="color: #2e8ded" target="_blank" href="https://ylui.yuri2.cn">https://ylui.yuri2.cn</a>');
+                        YL.msg("YLUI v"+YL.info.version+" 社区版",'当前YLUI为社区版，仅限个人用户学习使用，禁止商用及企业使用。<br/>更多信息及获取商业授权请访问:<br/>YLUI官网：'+'<a style="color: #2e8ded" target="_blank" href="https://ylui.yuri2.cn">https://ylui.yuri2.cn</a>');
                       },1500)
                     });
                 }
@@ -448,7 +448,7 @@ YL.render = function (data) {
                 }
                 this.$nextTick(function () {
                     senList.forEach(function (idWindow) {
-                        window.frames[idWindow].postMessage({
+                        !window.frames[idWindow].postMessage||window.frames[idWindow].postMessage({
                             "type": "ylui-event",
                             event: event,
                             target: senList,
@@ -605,14 +605,14 @@ YL.render = function (data) {
                             clearInterval(itvPing);
                             return;
                         }
-                        window.frames[winID].postMessage({
+                        !window.frames[winID].postMessage||window.frames[winID].postMessage({
                             "type": "ylui-ping",
                             id: winID,
                             secrete: secrete,
                             itv: itvPing,
                             data: win.data,
                         }, '*');
-                    }, 200);
+                    }, 500);
                     //监听iframe点击事件
                     var ifr = $("#" + win.idIframe)[0];
                     YL.util.iframeOnClick.track(ifr, function () {
@@ -854,7 +854,6 @@ YL.render = function (data) {
                     left: win.style.position.left?win.style.position.x + 'px':'auto',
                     bottom: !win.style.position.top?win.style.position.y + 'px':'auto',
                     right: !win.style.position.left?win.style.position.x + 'px':'auto',
-                    // border: '1px solid ' + (!win.plugin ? this.configs.themeColor : "transparent"),
                     'z-index': win.style.index + (win.background ? -500 : 0),
                 }
             },

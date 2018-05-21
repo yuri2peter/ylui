@@ -508,7 +508,6 @@ body {
 #yl .bar {
     height: 40px;
     line-height: 40px;
-    background-color: rgb(0, 0, 0);
     color: white;
     cursor: default;
     /*box-shadow: 0 0 16px #555;*/
