@@ -124,7 +124,7 @@
             <div class="shader " v-if="shortcuts[drawer]"
                  @mousedown.self="drawer=null"
                  style="z-index:999999">
-                <div class="drawer shadow">
+                <div class="drawer">
                     <div class="mask"
                          :style="{background:configs.themeColor,opacity:lowEffect?1:0.6}"></div>
                     <div class="title">{{shortcuts[drawer].title}}</div>
@@ -215,8 +215,8 @@
     </div>
 
     <!--任务栏-->
-    <div class="bar shadow" @contextMenu="barContextMenu" :style="barStyle" :class="{top:configs.topTaskBar}">
-        <div class="mask" style="background-color: rgba(0,0,0,0.55)"></div>
+    <div class="bar" @contextMenu="barContextMenu" :style="barStyle" :class="{top:configs.topTaskBar}">
+        <div class="mask" :style="{background:lowEffect?'black':'rgba(0,0,0,0.55)'}"></div>
         <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.5"></div>
         <!--开始按钮-->
         <div class="btn shadow-hover fa fa-fw"
@@ -384,7 +384,7 @@
     </transition>
 
     <!--操作中心-->
-    <div class="center shadow" :class="{open:center.open}" :style="centerStyle">
+    <div class="center" :class="{open:center.open}" :style="centerStyle">
         <div class="mask"
              :style="{background:configs.themeColor,opacity:lowEffect?1:0.6}"></div>
         <div class="banner">{{YL.lang("NoticeCenter")}}
@@ -417,7 +417,7 @@
         <div class="shader" v-if="shortSetting"
              @click.self="shortSetting=null;runtime.shortcutNewParamName='',runtime.shortcutNewParamValue=''"
              :style="{'z-index':19930005}">
-            <div class="drawer shadow">
+            <div class="drawer">
                 <div class="mask"
                      :style="{background:configs.themeColor,opacity:lowEffect?1:0.6}"></div>
                 <div class="title">{{shortSetting.title}}<span v-if="shortSetting.app" class="btn-advance"
