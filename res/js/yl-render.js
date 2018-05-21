@@ -1333,10 +1333,7 @@ YL.render = function (data) {
                         }
                     }
                     if (s.drag.moved < 20&&Date.now()-downTime<300) {
-                        setTimeout(function () {
-                            //此处设置延时打开防止点击事件误触发
-                            that.shortcutOpen(s, id);
-                        },200);
+                        that.shortcutOpen(s, id); //TODO 此处是否需要加延时操作
                     }
                     s.drag.moved = 0;
                     s.drag.left = s.drag.top = 0;
@@ -1926,7 +1923,7 @@ YL.render = function (data) {
                 return this.configs.highPerformance || this.configs.highPerformanceOnMobile&&this.runtime.isSmallScreen
             },
             boxOpen: function () {
-                return (this.startMenu.open || this.center.open || this.drawer || this.shortSetting);
+                return (this.startMenu.open || this.center.open || this.drawer!==null || this.shortSetting);
             },
             tilesBoxStyle: function () {
                 var width = this.runtime.clientSize.width;
