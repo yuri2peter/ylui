@@ -19,13 +19,6 @@ YL.onLoad(function () {
     var load=urlParsed.params.load;
     if(load){
         loadFromFile(load);
-    }else if(localStorage.getItem(YL.static.localStorageName)){
-        YL.onReady(function () {
-            setTimeout(function () {
-                YL.msg("欢迎使用"+YL.static.softwareName,Yuri2.template("当前版本:${0}<br/>已读取本地数据",YL.static.version));
-            },1000);
-        });
-        YL.init();
     }else{
         loadFromFile('basic');
     }
