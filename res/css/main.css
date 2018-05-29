@@ -706,13 +706,13 @@ body {
     top: 0;
     left: 0;
     z-index: -999;
-    background-size: 100% 100%;
     transform: scale3d(1.1, 1.1, 1);
-}
-
-#yl.small-screen .desktop .background {
     background-size: auto 100%;
     background-position: center center;
+}
+
+#yl .desktop .background.cross {
+    background-size: 100% auto;
 }
 
 #yl.horizontal-screen.small-screen .desktop .background {

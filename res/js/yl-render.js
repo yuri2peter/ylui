@@ -306,42 +306,8 @@ YL.render = function (data) {
                     }
                 };
 
-                //错误提醒上报
-                /**
-                if(first){
-                    window.onerror = function (errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
-                        if(!YL.static.urlJsonpErrorReport){return;}
-                        try{
-                            var error={
-                                errorMessage:errorMessage,
-                                scriptURI:scriptURI,
-                                lineNumber:lineNumber,
-                                columnNumber:columnNumber,
-                                errorObj:errorObj,
-                            };
-                            var dataSend={
-                                'version':YL.static.version,
-                                'lang': YL.static.lang,
-                                'url': location.href,
-                                'authorization': YL.static.authorization,
-                                'serialNumber': YL.static.serialNumber,
-                                'error':JSON.stringify(error),
-                            };
-                            var errorMsgContent='';
-                            for (var i in error){
-                                errorMsgContent+=i+':'+error[i]+'<br/>';
-                            }
-                            !YL.static.debug||YL.msg(YL.lang("WarningErrorTitle"),errorMsgContent);
-                            Yuri2.jsonp(YL.static.urlJsonpErrorReport,dataSend,function(data){
-                                if(data.status==='success'){
-                                    console.log('Error reported.')
-                                }
-                            })
-                        }catch (e){
-                            console.warn(e);
-                        }
-                    };
-                }**/
+                //壁纸比例修正
+                that.backgroundUpdateScale();
 
                 //自动保存服务
                 if (first) {
@@ -843,6 +809,7 @@ YL.render = function (data) {
                 win.style.index = YL.util.getBiggerWinZIndex();
                 this.runtime.winActive = id;
                 this.startMenu.open = false;
+                this.drawer = null;
                 this.center.open = false;
             },
             winStyle: function (id) {
@@ -877,7 +844,7 @@ YL.render = function (data) {
             },
             winTaskClick: function (id) {
                 var win = this.wins[id];
-                if (this.winIsMin(id) || this.startMenu.open) {
+                if (this.winIsMin(id) || this.startMenu.open || this.drawer) {
                     this.winShow(id);
                     this.winSetActive(id);
                 } else {
@@ -1759,6 +1726,15 @@ YL.render = function (data) {
                     that.configs.themeColor = color;
                 }, 0.6)
             },
+            backgroundUpdateScale: function () {
+                var that=this;
+                var url = this.configs.wallpaper;
+                YL.util.imgUrlToSize(url, function (size) {
+                    var width = size.width || 1;
+                    var height = size.height || 1;
+                    that.runtime.wallpaperScale = width/height;
+                })
+            },
             sidebarBtnContextMenu: function (i, e) {
                 var that = this;
                 var btn = that.startMenu.sidebar.btns[i];
@@ -1886,6 +1862,7 @@ YL.render = function (data) {
                             that.backgroundToThemeColor()
                         }
                     };
+                    that.backgroundUpdateScale()
                 }
             },
             'wins': {
@@ -1966,6 +1943,10 @@ YL.render = function (data) {
                     }
                 }
             },
+            backgroundCross: function () {
+                var r = this.runtime;
+                return r.wallpaperScale < r.clientSize.width/ r.clientSize.height;
+            }
         },
     });
 };

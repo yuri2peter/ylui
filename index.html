@@ -210,7 +210,7 @@
         <div class="background-mask " @click.self="desktopClick"
              @contextMenu.self="desktopContextMenu"></div>
         <div class="background"
-             :class="{blur:configs.wallpaperBlur||(!configs.highPerformance&&boxOpen)}"
+             :class="{blur:configs.wallpaperBlur||(!configs.highPerformance&&boxOpen), cross:backgroundCross}"
              :style="{'background-image':'url('+runtime.wallpaper+')'}"></div>
     </div>
 

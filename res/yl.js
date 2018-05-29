@@ -63,6 +63,7 @@ window.YL = {
                 tilesWidth: 0,//磁贴框的尺寸（动态计算）
                 tilesGroupNum: 1,//磁贴框每一行最多几个组（计算得出）
                 wallpaper: '',
+                wallpaperScale: 1, //壁纸宽高比
                 shortcutNewParamName: "",//图标的新参数input name
                 shortcutNewParamValue: "",//图标的新参数input val
                 isIE: false,//是否IE,
@@ -773,7 +774,6 @@ window.YL = {
             }
             var img = new Image;
             img.src = url;
-            // img.crossOrigin  = '';//跨域声明（只在chrome和firefox有效——吗？）
             img.crossOrigin = 'anonymous';//跨域声明（只在chrome和firefox有效——吗？）
             img.onload = function () {
                 try {
@@ -807,6 +807,19 @@ window.YL = {
                 } catch (e) {
                     console.warn(e)
                 }
+            };
+        },
+        imgUrlToSize: function (url, cb) {
+            var img = new Image;
+            img.src = url;
+            img.crossOrigin = 'anonymous';//跨域声明（只在chrome和firefox有效——吗？）
+            img.onload = function () {
+              if (cb) {
+                cb({
+                  width:img.width,
+                  height:img.height,
+                });
+              }
             };
         },
         randInt: function (n, m) {
