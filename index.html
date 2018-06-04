@@ -96,6 +96,7 @@
      v-show="ready">
     <!--桌面 图标 抽屉 窗体-->
     <div class="desktop "
+         @mousemove="desktopMouseMove"
          :style="{top:configs.topTaskBar?40+'px':0}">
         <!--图标-->
         <div class="shortcut " :class="shortcutClass(id,s)" v-for="(s, id) in shortcuts"
