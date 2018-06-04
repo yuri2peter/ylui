@@ -1098,6 +1098,20 @@ YL.render = function (data) {
         this.runtime.pluginIconsOpen = false;
         this.runtime.CalendarOpen = false;
       },
+      desktopMouseDown: function (e) {
+        this.hideOpens();
+        !e||this.emitWinEvent(0, 'desktopMouseDown',{
+          x:e.x,
+          y:e.y,
+        });
+      },
+      desktopMouseUp: function (e) {
+        this.hideOpens();
+        !e||this.emitWinEvent(0, 'desktopMouseUp',{
+          x:e.x,
+          y:e.y,
+        });
+      },
       desktopClick: function (e) {
         this.hideOpens();
         !e||this.emitWinEvent(0, 'desktopClick',{
