@@ -117,7 +117,7 @@
       "title": "系统设置",
       "url": "./res/apps/yl-system/index.html",
       "customTile": "",
-      "resizeable": true,
+      "resizable": true,
       "urlRandomToken": true
     },
     "yl-color-picker": {
@@ -151,7 +151,7 @@
       "title": "取色器",
       "url": "./res/apps/colorPicker/colorPicker.html",
       "customTile": "",
-      "resizeable": false,
+      "resizable": false,
       "urlRandomToken": true
     },
     "yl-browser": {
@@ -185,7 +185,7 @@
       "title": "浏览器",
       "url": "./res/apps/browser/index.html",
       "customTile": "",
-      "resizeable": true,
+      "resizable": true,
       "urlRandomToken": true
     },
     "yl-app-store": {
@@ -219,7 +219,7 @@
       "title": "应用商店",
       "url": "https://appstore.ylui.yuri2.cn",
       "customTile": "",
-      "resizeable": true,
+      "resizable": true,
       "urlRandomToken": true
     },
     "yl-app-home": {
@@ -253,7 +253,7 @@
       "title": "YLUI 官网",
       "url": "https://ylui.yuri2.cn",
       "customTile": "",
-      "resizeable": true,
+      "resizable": true,
       "urlRandomToken": true
     },
     "yl-server": {
@@ -287,7 +287,7 @@
       "title": "YLUI官方后台服务",
       "url": "https://server.ylui.yuri2.cn",
       "customTile": "",
-      "resizeable": true,
+      "resizable": true,
       "urlRandomToken": true
     }
   },
