@@ -44,9 +44,14 @@ window.YL = {
           width: 0,
           height: 0,
         },
-        startMenuSize: {
+        startMenu: {
           width: 0,
           height: 0,
+          drag: {
+            x: 0,
+            y: 0,
+            mDown: false,
+          }
         },
         isSmallScreen: false,
         isHorizontalScreen: true,

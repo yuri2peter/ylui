@@ -163,57 +163,60 @@ YL.render = function (data) {
             }],
         ]]
       },
+      onResize: function () {
+        var that = this;
+  
+        //屏幕尺寸
+        var clientSize = Yuri2.getClientSize();
+        that.runtime.clientSize.width = clientSize.width;
+        that.runtime.clientSize.height = clientSize.height;
+        that.runtime.desktopSize.width = clientSize.width;
+        that.runtime.desktopSize.height = clientSize.height - 40;
+        that.runtime.isSmallScreen = clientSize.width <= 768;
+        that.runtime.isHorizontalScreen = clientSize.width > clientSize.height;
+        that.runtime.startMenu.width = clientSize.width > that.startMenu.width ? that.startMenu.width : clientSize.width;
+        that.runtime.startMenu.height = that.runtime.desktopSize.height > that.startMenu.height && !that.runtime.isSmallScreen
+          ? that.startMenu.height : that.runtime.desktopSize.height;
+  
+        //计算磁贴尺寸
+        var widthFixed = that.runtime.startMenu.width - (that.runtime.isSmallScreen ? 48 : 312);
+        var groupNum = 1;//多少列
+        if (widthFixed <= 460) {
+          groupNum = 1;
+        } else if (widthFixed <= 769) {
+          groupNum = 2;
+        } else if (widthFixed <= 1024) {
+          groupNum = 3;
+        } else {
+          groupNum = 4;
+        }
+        that.runtime.tilesGroupNum = groupNum;
+        for (var size = 0; size < 1000; size++) {
+          var width = (size + 4) * 6;
+          if (width > (widthFixed - 12 * groupNum) / groupNum) {
+            size--;
+            break;
+          }
+        }
+        that.runtime.tileSize = size;
+        that.runtime.tilesWidth = (size + 4) * 6;
+  
+        //计算桌面网格尺寸
+        that.runtime.shortcutWidth = that.runtime.isSmallScreen ? 56 : 68;
+        that.runtime.shortcutHeight = that.runtime.isSmallScreen ? 70 : 90;
+        that.runtime.shortcutsGrid.x = parseInt(that.runtime.desktopSize.width / that.runtime.shortcutWidth);
+        that.runtime.shortcutsGrid.y = parseInt(that.runtime.desktopSize.height / that.runtime.shortcutHeight);
+  
+        //给窗体发送resize事件
+        that.emitWinEvent(0, 'resize',{
+          width:that.runtime.desktopSize.width,
+          height:that.runtime.desktopSize.height,
+        });
+      },
       initRuntime: function (first) {
         var that = this;
-
         //窗体尺寸变更监听
-        var fnResize = function () {
-          //屏幕尺寸
-          var clientSize = Yuri2.getClientSize();
-          that.runtime.clientSize.width = clientSize.width;
-          that.runtime.clientSize.height = clientSize.height;
-          that.runtime.desktopSize.width = clientSize.width;
-          that.runtime.desktopSize.height = clientSize.height - 40;
-          that.runtime.isSmallScreen = clientSize.width <= 768;
-          that.runtime.isHorizontalScreen = clientSize.width > clientSize.height;
-          that.runtime.startMenuSize.width = clientSize.width > that.startMenu.width ? that.startMenu.width : clientSize.width;
-          that.runtime.startMenuSize.height = that.runtime.desktopSize.height > that.startMenu.height ? that.startMenu.height : that.runtime.desktopSize.height;
-          
-          //计算磁贴尺寸
-          var widthFixed = that.runtime.startMenuSize.width - (that.runtime.isSmallScreen ? 48 : 312);
-          var groupNum = 1;//多少列
-          if (widthFixed <= 460) {
-            groupNum = 1;
-          } else if (widthFixed <= 769) {
-            groupNum = 2;
-          } else if (widthFixed <= 1024) {
-            groupNum = 3;
-          } else {
-            groupNum = 4;
-          }
-          that.runtime.tilesGroupNum = groupNum;
-          for (var size = 0; size < 1000; size++) {
-            var width = (size + 4) * 6;
-            if (width > (widthFixed - 12 * groupNum) / groupNum) {
-              size--;
-              break;
-            }
-          }
-          that.runtime.tileSize = size;
-          that.runtime.tilesWidth = (size + 4) * 6;
-
-          //计算桌面网格尺寸
-          that.runtime.shortcutWidth = that.runtime.isSmallScreen ? 56 : 68;
-          that.runtime.shortcutHeight = that.runtime.isSmallScreen ? 70 : 90;
-          that.runtime.shortcutsGrid.x = parseInt(that.runtime.desktopSize.width / that.runtime.shortcutWidth);
-          that.runtime.shortcutsGrid.y = parseInt(that.runtime.desktopSize.height / that.runtime.shortcutHeight);
-
-          //给窗体发送resize事件
-          that.emitWinEvent(0, 'resize',{
-            width:that.runtime.desktopSize.width,
-            height:that.runtime.desktopSize.height,
-          });
-        };
+        var fnResize = that.onResize;
         fnResize();
         if (first)
           $(window).resize(fnResize);
@@ -1469,7 +1472,6 @@ YL.render = function (data) {
         }
         return count;
       },
-
       menuItemClick: function (item) {
         this.appOpen(item.app, item, item)
       },
@@ -1876,6 +1878,36 @@ YL.render = function (data) {
       },
       shortSettingParamsDelete: function (name) {
         this.$delete(this.shortSetting.params, name);
+      },
+      startMenuResizeMouseDown: function (e) {
+        //拖动逻辑
+        var that = this;
+        var startMenu = that.runtime.startMenu;
+        startMenu.drag.x = e.pageX;
+        startMenu.drag.y = e.pageY;
+        startMenu.drag.mDown = true;
+        var fnMouseUp = function (e) {
+          if (!startMenu.drag.mDown) return;
+          startMenu.drag.mDown = false;
+          $(document).unbind('mouseup', fnMouseUp);
+          $(document).unbind('mousemove', fnMouseMove);
+        };
+        var fnMouseMove = function (e) {
+          if (!startMenu.drag.mDown) return;
+          var minWidth = 320;
+          var minHeight = 160;
+          var x = e.pageX;
+          var y = e.pageY;
+          that.startMenu.width += (x - startMenu.drag.x);
+          (that.startMenu.width) > minWidth || (that.startMenu.width = minWidth);
+          that.startMenu.height -= (y - startMenu.drag.y);
+          (that.startMenu.height) > minHeight || (that.startMenu.height = minHeight);
+          startMenu.drag.x = x;
+          startMenu.drag.y = y;
+          that.onResize();
+        };
+        $(document).mouseup(fnMouseUp);
+        $(document).mousemove(fnMouseMove);
       },
     },
     watch: {

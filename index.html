@@ -305,12 +305,13 @@
     <!--开始菜单-->
     <transition name="opacity">
         <div class="startMenu shadow"
-             :style="{width: runtime.startMenuSize.width+'px', height: runtime.startMenuSize.height +'px'}"
+             :style="{width: runtime.startMenu.width+'px', height: runtime.startMenu.height +'px'}"
              @click="center.open = false;runtime.pluginIconsOpen = false;runtime.CalendarOpen = false;"
              v-show="startMenu.open"
              :class="{topTaskBar:configs.topTaskBar}">
             <div class="mask"
                  :style="{background:configs.themeColor}"></div>
+            <div class="startMenu-resize" @mousedown="startMenuResizeMouseDown($event)"></div>
             <!--左侧边栏-->
             <div class="sidebar" :class="{spread:startMenu.sidebar.open,'shadow-hover':startMenu.sidebar.open}"
                  @mouseleave="startMenu.sidebar.open=false">

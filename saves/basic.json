@@ -2,7 +2,7 @@
   "configs": {
     "topTaskBar": false,
     "sound": false,
-    "wallpaper": "./res/img/wallpapers/bg1.jpg",
+    "wallpaper": "./res/img/wallpapers/bg2.jpg",
     "wallpaperBlur": false,
     "wallpaperSlide": false,
     "wallpaperSlideRandom": true,

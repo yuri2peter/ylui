@@ -1036,6 +1036,16 @@ body {
     bottom: -34px;
 }
 
+#yl .startMenu .startMenu-resize {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    right: 0;
+    top: 0;
+    cursor: ne-resize;
+    z-index: 99;
+}
+
 #yl .center {
     color: white;
     /*background-color: rgba(0, 0, 0, 0.82);*/
