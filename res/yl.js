@@ -46,6 +46,10 @@ window.YL = {
           width: 0,
           height: 0,
         },
+        startMenuSize: {
+          width: 0,
+          height: 0,
+        },
         isSmallScreen: false,
         isHorizontalScreen: true,
         lang: 'zh-cn',
@@ -84,6 +88,8 @@ window.YL = {
       tiles: [],
       startMenu: { //开始菜单
         open: false,
+        width: 800,
+        height: 600,
         sidebar: {
           open: false,
           btns: [],

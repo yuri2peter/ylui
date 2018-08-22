@@ -33,17 +33,16 @@ body {
 
 
 #yl .shadow {
-    /*box-shadow: rgba(7, 7, 7, 0.2) 0px 0px 20px 2px*/
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 20px 2px
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px 2px
 }
 #yl .shadow-inside{
-    box-shadow: inset rgba(0, 0, 0, 0.3) 0px 0px 20px 2px
+    box-shadow: inset rgba(0, 0, 0, 0.1) 0px 0px 20px 2px
 }
 #yl .shadow-hover:hover {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 20px 2px
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px 2px
 }
 #yl .shadow-inside-hover:hover{
-    box-shadow: inset rgba(0, 0, 0, 0.3) 0px 0px 20px 2px
+    box-shadow: inset rgba(0, 0, 0, 0.1) 0px 0px 20px 2px
 }
 #yl .mask {
     position: absolute;
@@ -65,15 +64,11 @@ body {
 
 #yl .shader {
     position: fixed;
-    /*top:0;*/
-    /*left:0;*/
-    /*width:100%;*/
-    /*height:100%;*/
     width: 120%;
     height: 120%;
     left: -10%;
     top: -10%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 #yl .blur {
@@ -246,11 +241,6 @@ body {
 
 #yl .desktop .win.plugin .bar:hover, #yl .desktop .win.plugin .address-bar:hover {
     opacity: 1 !important;
-}
-
-#yl .desktop .win.active {
-    /*box-shadow: 0 0 16px rgba(255, 255, 255, 0.1);*/
-
 }
 
 #yl .desktop .win .bar-mask {
@@ -931,8 +921,8 @@ body {
     width: 256px;
     height: 100%;
     left: 52px;
-    z-index: 1;
-    padding-top: 6px;
+    z-index: 16;
+    padding-top: 16px;
     transition: left 0.3s;
 }
 

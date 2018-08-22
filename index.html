@@ -98,11 +98,11 @@
     <div class="desktop "
          :style="{top:configs.topTaskBar?40+'px':0}">
         <!--图标-->
-        <div class="shortcut " :class="shortcutClass(id,s)" v-for="(s, id) in shortcuts"
+        <div class="shortcut" :class="shortcutClass(id,s)" v-for="(s, id) in shortcuts"
              :key="id"
              @mousedown="shortcutMouseDown(id,null, $event)"
              @touchstart="shortcutMouseDown(id,null, $event)"
-             v-show="runtime.shortcutsShow&&!startMenu.open"
+             v-show="runtime.shortcutsShow"
              @contextMenu="shortcutContextMenu(id,null,$event)"
              :title="s.title"
              :style="shortcutStyle(id,null)">
@@ -126,7 +126,7 @@
                  style="z-index:999999">
                 <div class="drawer">
                     <div class="mask"
-                         :style="{background:configs.themeColor,opacity:lowEffect?1:0.6}"></div>
+                         :style="{background:configs.themeColor}"></div>
                     <div class="title">{{shortcuts[drawer].title}}</div>
                     <div class="shortcut" v-for="(s, id) in shortcuts[drawer].children"
                          :class="shortcutClass(id,s,true)"
@@ -147,7 +147,7 @@
         <transition-group name="opacity">
             <div v-for="(w,id) in wins" class="win shadow" :key="id"
                  :id="id"
-                 v-show="!winIsMin(id)&&(w.plugin||!boxOpen)"
+                 v-show="!winIsMin(id)"
                  @mousedown="winSetActive(id)"
                  :class="winClass(id)"
                  :style="winStyle(id)">
@@ -214,14 +214,14 @@
              @mouseup.self="desktopMouseUp"
              @contextMenu.self="desktopContextMenu"></div>
         <div class="background"
-             :class="{blur:configs.wallpaperBlur||(!configs.highPerformance&&boxOpen), cross:backgroundCross}"
+             :class="{blur:configs.wallpaperBlur, cross:backgroundCross}"
              :style="{'background-image':'url('+runtime.wallpaper+')'}"></div>
     </div>
 
     <!--任务栏-->
     <div class="bar" @contextMenu="barContextMenu" :style="barStyle" :class="{top:configs.topTaskBar}">
-        <div class="mask" :style="{background:lowEffect?'black':'rgba(0,0,0,0.55)'}"></div>
-        <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.5"></div>
+        <div class="mask" :style="{background:configs.themeColor}"></div>
+        <div class="mask" :style="{background:'rgba(0,0,0,0.18)'}"></div>
         <!--开始按钮-->
         <div class="btn shadow-hover fa fa-fw"
              :class="[ 'fa-'+YL.info.iconBtnStart ]"
@@ -250,22 +250,23 @@
         </div>
         <!--时间-->
         <div class="btn shadow-hover" v-show="!runtime.isSmallScreen" v-html="runtime.time"
-             @click="runtime.CalendarOpen=!runtime.CalendarOpen;"
+             @click="runtime.CalendarOpen=!runtime.CalendarOpen;runtime.pluginIconsOpen=false;"
              style="font-size: 12px;line-height: 20px;float: right"></div>
         <!--托盘按钮-->
         <div class="btn shadow-hover fa fa-fw "
              :class="{'fa-angle-up':!configs.topTaskBar,'fa-angle-down':configs.topTaskBar}"
              style="float: right;padding: 0"
-             @click="runtime.pluginIconsOpen=!runtime.pluginIconsOpen;"></div>
+             @click="runtime.pluginIconsOpen=!runtime.pluginIconsOpen;runtime.CalendarOpen=false;"></div>
         <!--插件托盘盒子-->
         <transition name="opacity">
             <div class="plugin-icons shadow" v-show="runtime.pluginIconsOpen">
-                <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.9"></div>
+                <div class="mask" :style="{background:configs.themeColor}" ></div>
+                <div class="mask" style="background: white; opacity: 0.04"></div>
                 <div class="plugin-icon" @click="winShowToggle(id)"
                      :class="{active:id===runtime.winActive&&!winIsMin(id)}"
                      v-for="(w,id) in wins" v-if="w.plugin" @contextMenu="winContextMenu(id,$event)"
                      :title="w.title"
-                     :style="{opacity:winIsMin(id)?0.2:1}">
+                     :style="{opacity:winIsMin(id)?0.6:1}">
                     <yl-icon :icon="w.icon"></yl-icon>
                 </div>
             </div>
@@ -274,7 +275,8 @@
         <transition name="opacity">
             <div id="_box_time" @contextMenu="ContextMenu.render($event,true)" class="calendar-box shadow"
                  v-show="runtime.CalendarOpen">
-                <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.9"></div>
+                <div class="mask" :style="{background:configs.themeColor}" ></div>
+                <div class="mask" style="background: white; opacity: 0.02"></div>
                 <div class="_h_m_s div-time"></div>
                 <div class="_y_m_d div-time"></div>
                 <div class="calendar clearfix">
@@ -302,12 +304,13 @@
 
     <!--开始菜单-->
     <transition name="opacity">
-        <div class="startMenu"
+        <div class="startMenu shadow"
+             :style="{width: runtime.startMenuSize.width+'px', height: runtime.startMenuSize.height +'px'}"
              @click="center.open = false;runtime.pluginIconsOpen = false;runtime.CalendarOpen = false;"
              v-show="startMenu.open"
-             :class="{topTaskBar:configs.topTaskBar,blur:shortSetting&&!lowEffect}">
+             :class="{topTaskBar:configs.topTaskBar}">
             <div class="mask"
-                 :style="{background:configs.themeColor,opacity:lowEffect?1:0.5}"></div>
+                 :style="{background:configs.themeColor}"></div>
             <!--左侧边栏-->
             <div class="sidebar" :class="{spread:startMenu.sidebar.open,'shadow-hover':startMenu.sidebar.open}"
                  @mouseleave="startMenu.sidebar.open=false">
@@ -388,9 +391,9 @@
     </transition>
 
     <!--操作中心-->
-    <div class="center" :class="{open:center.open}" :style="centerStyle">
+    <div class="center shadow" :class="{open:center.open}" :style="centerStyle">
         <div class="mask"
-             :style="{background:configs.themeColor,opacity:lowEffect?1:0.6}"></div>
+             :style="{background:configs.themeColor}"></div>
         <div class="banner">{{YL.lang("NoticeCenter")}}
             <div class="clear" v-show="center.msgNum>0" @click="btnCenterClear">{{YL.lang("NoticeClearAll")}}</div>
         </div>

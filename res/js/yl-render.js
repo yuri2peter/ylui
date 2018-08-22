@@ -176,15 +176,21 @@ YL.render = function (data) {
           that.runtime.desktopSize.height = clientSize.height - 40;
           that.runtime.isSmallScreen = clientSize.width <= 768;
           that.runtime.isHorizontalScreen = clientSize.width > clientSize.height;
-
+          that.runtime.startMenuSize.width = clientSize.width > that.startMenu.width ? that.startMenu.width : clientSize.width;
+          that.runtime.startMenuSize.height = that.runtime.desktopSize.height > that.startMenu.height ? that.startMenu.height : that.runtime.desktopSize.height;
+          
           //计算磁贴尺寸
-          var widthFixed = that.runtime.clientSize.width - (that.runtime.isSmallScreen ? 48 : 312);
+          var widthFixed = that.runtime.startMenuSize.width - (that.runtime.isSmallScreen ? 48 : 312);
           var groupNum = 1;//多少列
-          if (widthFixed <= 768) {
+          if (widthFixed <= 460) {
             groupNum = 1;
-          } else if (widthFixed <= 1200) {
+          } else if (widthFixed <= 769) {
             groupNum = 2;
-          } else groupNum = 3;
+          } else if (widthFixed <= 1024) {
+            groupNum = 3;
+          } else {
+            groupNum = 4;
+          }
           that.runtime.tilesGroupNum = groupNum;
           for (var size = 0; size < 1000; size++) {
             var width = (size + 4) * 6;
@@ -846,7 +852,6 @@ YL.render = function (data) {
         return {
           active: id === this.runtime.winActive && !this.winIsMin(id),
           plugin: w.plugin,
-          blur: !this.lowEffect && this.boxOpen && w.plugin,
           "addressBar-hidden": !w.addressBar,
         }
       },
@@ -1207,7 +1212,6 @@ YL.render = function (data) {
           move: s.drag.mDown,
           insert: this.runtime.shortcutInsert === id && !fromDrawer,
           over: this.runtime.shortcutOver === id && !fromDrawer,
-          blur: this.boxOpen && !this.lowEffect && !fromDrawer,
           cut: this.shortcutCutOutFromDrawer(s),
         };
       },
