@@ -78,8 +78,6 @@
         "preview": "./res/img/wallpapers/bg15_1.jpg"
       }
     ],
-    "highPerformance": false,
-    "highPerformanceOnMobile": true,
     "pathRes": "./res",
     "shortcutsSortAuto": true,
     "debug": false,

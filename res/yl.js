@@ -33,8 +33,6 @@ window.YL = {
         themeColor: "black",
         autoThemeColor: true,
         wallpapers: [],
-        highPerformance: false,//高性能模式
-        highPerformanceOnMobile: true,//在手机上自动高性能模式
       },
       runtime: {
         ready: false,

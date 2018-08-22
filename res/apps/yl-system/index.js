@@ -149,8 +149,6 @@ YLApp.onReady(function () {
             activeAppId: null,
             textData: '',
             btnEnableLoading: false,
-            highPerformance: false,
-            highPerformanceOnMobile: false,
             appSetting: null,//app高级配置
             appSettingForm: {},
             isSmallScreen: false,//是否小屏幕
@@ -163,16 +161,6 @@ YLApp.onReady(function () {
                         YL.vue.$set(YL.vue, 'apps', Yuri2.jsonDeepCopy(this.apps));
                         layer.msg("已保存");
                     }
-                }
-            },
-            highPerformance: {
-                handler: function (val, oldVal) {
-                    YL.vue.configs.highPerformance = val;
-                }
-            },
-            highPerformanceOnMobile:{
-                handler: function (val, oldVal) {
-                    YL.vue.configs.highPerformanceOnMobile = val;
                 }
             },
             colorChoose: {
@@ -243,8 +231,6 @@ YLApp.onReady(function () {
                     that.wallpaperSlideItv = configs.wallpaperSlideItv;
                     that.openMax = configs.openMax;
                     that.topTaskBar = configs.topTaskBar;
-                    that.highPerformance = configs.highPerformance;
-                    that.highPerformanceOnMobile = configs.highPerformanceOnMobile;
                     if (!that.colorChoose) {
                         that.colorChoose = configs.themeColor;
                     }

@@ -341,20 +341,6 @@
                         inactive-color="gray">
                 </el-switch>
             </p>
-            <p>
-                <el-switch
-                        v-model="highPerformance"
-                        :active-text="YL.lang('HighPerformance')"
-                        inactive-color="gray">
-                </el-switch>
-            </p>
-            <p>
-                <el-switch
-                        v-model="highPerformanceOnMobile"
-                        :active-text="YL.lang('HighPerformance')+'('+YL.lang('MobileScreen')+')'"
-                        inactive-color="gray">
-                </el-switch>
-            </p>
             <div style="margin-top: 20px">
                 {{YL.lang('MaxNumberOfWindows')}}
                 <el-select v-model="openMax" size="small" :placeholder="YL.lang('PleaseChoose')">

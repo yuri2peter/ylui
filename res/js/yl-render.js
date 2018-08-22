@@ -1931,12 +1931,6 @@ YL.render = function (data) {
       smallScreenAndMenuOpend: function () {
         return this.runtime.isSmallScreen && this.startMenu.open
       },
-      lowEffect: function () {
-        return this.configs.highPerformance || this.configs.highPerformanceOnMobile && this.runtime.isSmallScreen
-      },
-      boxOpen: function () {
-        return (this.startMenu.open || this.center.open || this.drawer !== null || this.shortSetting);
-      },
       tilesBoxStyle: function () {
         var width = this.runtime.clientSize.width;
         if (this.runtime.isSmallScreen) {
