@@ -4,8 +4,8 @@
     - configs.highPerformance
     - boxOpen
     - lowEffect
+- 修复日历插件
 
 TODO
-
 - 可拉伸的开始菜单
-- 修复日历插件
+

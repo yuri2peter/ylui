@@ -1,5 +1,5 @@
 YL.onReady(function () {
-  var lang = YL.static.lang !== 'zh-cn' ?
+  var lang = YL.static.lang === 'zh-cn' ||  YL.static.lang === 'zh-tw'?
     {
       Mon: '星期一',
       MonShort: '一',
@@ -140,7 +140,7 @@ YL.onReady(function () {
         
         clearTimeout(_delay_time);
         _delay_time = setTimeout(function () {
-          _aStrong[0].innerHTML = _setyear + '年' + (_setmonth + 1) + '月';
+          _aStrong[0].innerHTML = _setyear + '/' + (_setmonth + 1);
           _oYears_months.style.display = 'none';
           _oNormal.style.display = 'block';
           
@@ -179,7 +179,7 @@ YL.onReady(function () {
       str = _fn_layout(_setyear, _setmonth - 1, _setdate) + _fn_layout(_setyear, _setmonth, _setdate) + _fn_layout(_setyear, _setmonth + 1, _setdate);
     }
     oDays.innerHTML = str;
-    _aStrong[0].innerHTML = _setyear + '年' + (_setmonth + 1) + '月';
+    _aStrong[0].innerHTML = _setyear + '/' + (_setmonth + 1);
   }
   
   function _fn_layout(_setyear, _setmonth, _setdate) {
@@ -231,7 +231,7 @@ YL.onReady(function () {
   _aStrong[0].onclick = function () {
     clearTimeout(_delay_time);
     if (onOff === 0) {
-      _aStrong[0].innerHTML = _setyear + '年';
+      _aStrong[0].innerHTML = _setyear;
       _oYears_months.style.display = 'block';
       _fn_block(_oYears_months);
       _oNormal.style.display = 'none';
@@ -244,7 +244,7 @@ YL.onReady(function () {
       _oTenYears.style.display = 'block';
       _fn_block(_oTenYears);
     } else if (onOff === 2) {
-      _aStrong[0].innerHTML = _setyear + '年' + (_setmonth + 1) + '月';
+      _aStrong[0].innerHTML = _setyear + '/' + (_setmonth + 1);
       _oYears_months.style.display = 'none';
       _oNormal.style.display = 'block';
       _fn_block(_oNormal);
@@ -280,7 +280,7 @@ YL.onReady(function () {
         clearTimeout(_delay_time);
         _delay_time = setTimeout(function () {
           onOff = 1;
-          _aStrong[0].innerHTML = _setyear + '年';
+          _aStrong[0].innerHTML = _setyear;
           _oYears_months.style.display = 'block';
           _fn_block(_oYears_months);
           _oNormal.style.display = 'none';
@@ -315,7 +315,7 @@ YL.onReady(function () {
         _oYears_months_ul.style.transition = '0.5s';
         _oYears_months_ul.style.top = '-10.8rem';
       }, 10);
-      _aStrong[0].innerHTML = _setyear + '年';
+      _aStrong[0].innerHTML = _setyear;
     } else if (onOff === 2) {
       _temp_ten--;
       var _temp = _setyear + 10 * _temp_ten;
@@ -354,7 +354,7 @@ YL.onReady(function () {
         _oYears_months_ul.style.transition = '0.5s';
         _oYears_months_ul.style.top = '-10.8rem';
       }, 10);
-      _aStrong[0].innerHTML = _setyear + '年';
+      _aStrong[0].innerHTML = _setyear;
     } else if (onOff === 2) {
       _temp_ten++;
       var _temp = _setyear + 10 * _temp_ten;
