@@ -1,7 +1,65 @@
-YL.onLoad(function () {
+YL.onReady(function () {
+  var lang = YL.static.lang !== 'zh-cn' ?
+    {
+      Mon: '星期一',
+      MonShort: '一',
+      Tues: '星期二',
+      TuesShort: '二',
+      Wed: '星期三',
+      WedShort: '三',
+      Thur: '星期四',
+      ThurShort: '四',
+      Fri: '星期五',
+      FriShort: '五',
+      Sat: '星期六',
+      SatShort: '六',
+      Sun: '星期日',
+      SunShort: '日',
+      Jan: '1月',
+      Feb: '2月',
+      Mar: '3月',
+      Apr: '4月',
+      May: '5月',
+      June: '6月',
+      July: '7月',
+      Aug: '8月',
+      Sept: '9月',
+      Oct: '10月',
+      Nov: '11月',
+      Dec: '12月',
+    }:
+    {
+      Mon: 'Monday',
+      MonShort: 'Mon',
+      Tues: 'Tuesday',
+      TuesShort: 'Tues',
+      Wed: 'Wednesday',
+      WedShort: 'Wed',
+      Thur: 'Thursday',
+      ThurShort: 'Thur',
+      Fri: 'Friday',
+      FriShort: 'Fri',
+      Sat: 'Saturday',
+      SatShort: 'Sat',
+      Sun: 'Sunday',
+      SunShort: 'Sun',
+      Jan: 'Jan',
+      Feb: 'Feb',
+      Mar: 'Mar',
+      Apr: 'Apr',
+      May: 'May',
+      June: 'June',
+      July: 'July',
+      Aug: 'Aug',
+      Sept: 'Sept',
+      Oct: 'Oct',
+      Nov: 'Nov',
+      Dec: 'Dec',
+    };
+  
   var o_box_time = document.getElementById('_box_time');
   var aDiv_time = o_box_time.getElementsByClassName('div-time');
-  var arrWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+  var arrWeek = [lang.Sun, lang.Mon, lang.Tues, lang.Wed, lang.Thur, lang.Fri, lang.Sat];
   var oCalendar = o_box_time.getElementsByClassName('calendar')[0];
   var _aStrong = oCalendar.getElementsByTagName('strong');
   var oDays = oCalendar.getElementsByClassName('_days')[0].getElementsByTagName('ul')[0];
@@ -40,7 +98,7 @@ YL.onLoad(function () {
     var str;
     str = toZero(h) + ':' + toZero(m) + ':' + toZero(s);
     aDiv_time[0].innerHTML = str;
-    str = year + '年' + month + '月' + day + '日,' + arrWeek[week];
+    str = year + '/' + month + '/' + day + ',' + arrWeek[week];
     aDiv_time[1].innerHTML = str;
   }
   
@@ -336,8 +394,8 @@ YL.onLoad(function () {
   
   function initDom() {
     var domWeek = o_box_time.getElementsByClassName('_week')[0];
-    var week = ['日', '一', '二', '三', '四', '五', '六'];
-    var months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月',]
+    var week = [lang.SunShort, lang.MonShort, lang.TuesShort, lang.WedShort, lang.ThurShort, lang.FriShort, lang.SatShort];
+    var months = [lang.Jan, lang.Feb, lang.Mar, lang.Apr, lang.May, lang.June, lang.July, lang.Aug, lang.Sept, lang.Oct, lang.Nov, lang.Dec];
     week.forEach(function (t) {
       var span = document.createElement('span');
       span.innerHTML = t;

@@ -28,7 +28,6 @@
 }
 #_box_time ._y_m_d{
     color: rgba(255, 255, 255, 0.50);
-    width: 8.5rem;
     min-width: 12em;
     margin-left: 0.8rem;
     text-indent: 0.4rem;
