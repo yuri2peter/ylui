@@ -860,12 +860,11 @@ body {
     top: 0;
     transition: all 0.3s;
     overflow: hidden;
-    z-index: 2;
+    z-index: 20;
 }
 
 #yl .startMenu .sidebar.spread {
     width: 256px;
-    /*background-color: rgb(39, 39, 39);*/
 }
 
 #yl .startMenu .sidebar .btn-group {
@@ -918,23 +917,23 @@ body {
 #yl .startMenu .menu {
     position: absolute;
     overflow-x: hidden;
-    width: 256px;
-    height: 100%;
-    left: 52px;
+    width: 224px;
+    height: calc(100% - 32px);
     z-index: 16;
-    padding-top: 16px;
+    padding: 16px;
     transition: left 0.3s;
+    left: 48px;
 }
 
 #yl.small-screen .startMenu .menu {
-    width: calc(100% - 48px);
+    width: calc(100% - 80px);
 }
 
 #yl .startMenu .menu .item {
     color: white;
     line-height: 34px;
     position: relative;
-    padding: 0 10px;
+    padding-right: 10px;
     transition: all 0.2s;
     overflow: hidden;
     height: 0;
@@ -957,6 +956,7 @@ body {
     font-size: 22px;
     line-height: 30px;
     top: 2px;
+    left: 1px;
 }
 
 #yl .startMenu .menu .item .icon-drawer {

@@ -313,10 +313,13 @@
                  :style="{background:configs.themeColor}"></div>
             <div class="startMenu-resize" @mousedown="startMenuResizeMouseDown($event)"></div>
             <!--左侧边栏-->
-            <div class="sidebar" :class="{spread:startMenu.sidebar.open,'shadow-hover':startMenu.sidebar.open}"
+            <div class="sidebar"
+                 :style="{'background-color': configs.themeColor}"
+                 :class="{spread:startMenu.sidebar.open,'shadow-hover':startMenu.sidebar.open}"
                  @mouseleave="startMenu.sidebar.open=false">
                 <div class="mask"
-                     :style="{'background-color': startMenu.sidebar.open?configs.themeColor:'transparent'}"></div>
+                     style="background-color: white"
+                     :style="{opacity: startMenu.sidebar.open ? 0.04 : 0.02}"></div>
                 <div @click="startMenu.sidebar.open=!startMenu.sidebar.open" class="btn">
                     <i class="fa fa-fw fa-align-justify"></i><span class="title">{{YL.lang("Start")}}</span></div>
                 <div class="btn-group">

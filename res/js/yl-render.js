@@ -179,7 +179,7 @@ YL.render = function (data) {
           ? that.startMenu.height : that.runtime.desktopSize.height;
   
         //计算磁贴尺寸
-        var widthFixed = that.runtime.startMenu.width - (that.runtime.isSmallScreen ? 48 : 312);
+        var widthFixed = that.runtime.startMenu.width - (that.runtime.isSmallScreen ? 80 : 328);
         var groupNum = 1;//多少列
         if (widthFixed <= 460) {
           groupNum = 1;
@@ -1977,13 +1977,11 @@ YL.render = function (data) {
       menuStyle: function () {
         var width = this.runtime.clientSize.width;
         if (this.runtime.isSmallScreen) {
-          var left;
-          left = 48 + (this.runtime.menuOnLeft ? 0 : -width);
-
+          return {
+            left:  (48 + (this.runtime.menuOnLeft ? 0 : -width))+'px',
+          }
         }
-        return {
-          left: this.runtime.isSmallScreen ? left + "px" : '48px',
-        }
+        else return {};
       },
       barStyle: function () {
         if (this.configs.topTaskBar) {

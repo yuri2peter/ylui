@@ -1,10 +1,11 @@
 #yl .tiles-box{
     position: absolute;
-    height: calc(100% - 4px);
-    padding-top: 4px;
+    height: calc(100% - 16px);
+    padding: 8px 16px;
+    padding-right: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    width: calc(100% - 312px);
+    width: calc(100% - 328px);
     transition:left 0.3s ;
     /*column-count: 3;*/
 }
@@ -13,7 +14,7 @@
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    width: calc(100% - 48px);
+    width: calc(100% - 56px);
 }
 #yl .tiles-flex-container{
     width: 100%;
@@ -39,7 +40,7 @@
     float: right;
     line-height: inherit;
     font-size: 1.5em;
-    margin-right: 1.5em;
+    margin-right: 4px;
     opacity: 0;
     transition: all 0.3s;
 }
