@@ -1,7 +1,7 @@
 window.YL = {
   info: {
     softwareName: 'YLUI',
-    version: "2.0.6",
+    version: "2.1.0",
     iconBtnStart: 'yoast',
     author: 'Yuri2',
     contactInformation: 'yuri2peter@qq.com',
@@ -161,7 +161,7 @@ window.YL = {
     setTimeout(function () {
       var vue = YL.vue;
       vue.msgPres[msgPreID] = null;
-    }, 3000);
+    }, 5000);
   },
   open: function (appId, options) {
     //临时打开的窗口（添加临时app）

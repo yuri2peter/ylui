@@ -1184,3 +1184,10 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+#yl .msg-attention .mask-msg {
+    position: absolute;
+    bottom: 0;
+    height: 24px;
+    width: 100%;
+}

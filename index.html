@@ -468,9 +468,11 @@
         <div v-for="(msg,id) in msgPres" class="msg-attention animated" :key="msg.key"
              @click="center.open = true"
              :style="{bottom: msg.index*180+40+'px'}" v-if="msg">
-            <div class="mask" style="opacity: 0.7" :style="{background:configs.themeColor}"></div>
+            <div class="mask" :style="{background:configs.themeColor}"></div>
             <div class="title">{{msg.title}}</div>
             <div class="content selectable" v-html="msg.content"></div>
+            <div class="mask-msg"
+                 :style="{background: 'linear-gradient(to top,'+configs.themeColor+','+configs.themeColor+' 50%,transparent)'}"></div>
         </div>
     </transition-group>
 </div>
