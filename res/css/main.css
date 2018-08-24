@@ -503,6 +503,18 @@ body {
     /*box-shadow: 0 0 16px #555;*/
 }
 
+#yl .bar .powered-by {
+    text-align: center;
+    font-size: 12px;
+    opacity: .3;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+#yl .bar .powered-by.fade {
+    opacity: .1;
+}
+
 #yl > .bar {
     bottom: 0;
     width: 100%;
@@ -580,7 +592,10 @@ body {
 
 #yl .bar .btn:hover {
     background-color: rgba(255, 255, 255, 0.15) !important;
+}
 
+#yl .bar .btnStartOpen {
+    background-color: rgba(255, 255, 255, 0.10) !important;
 }
 
 #yl .bar #yl-btn-right-bottom {

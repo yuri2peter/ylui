@@ -222,9 +222,12 @@
     <div class="bar" @contextMenu="barContextMenu" :style="barStyle" :class="{top:configs.topTaskBar}">
         <div class="mask" :style="{background:configs.themeColor}"></div>
         <div class="mask" :style="{background:'rgba(0,0,0,0.18)'}"></div>
+        <div class="mask powered-by" :class="{fade: runtime.winOpened}" >
+            Powered by YLUI v{{YL.info.version}}
+        </div>
         <!--开始按钮-->
         <div class="btn shadow-hover fa fa-fw"
-             :class="[ 'fa-'+YL.info.iconBtnStart ]"
+             :class="[ 'fa-'+YL.info.iconBtnStart, {btnStartOpen: startMenu.open } ]"
              @click="if(startMenu.open){hideOpens();}else{hideOpens();startMenu.open=true} "></div>
         <!--子窗口的按钮-->
         <div class="btn win-task" @click="winTaskClick(id)"

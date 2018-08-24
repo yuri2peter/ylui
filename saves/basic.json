@@ -10,8 +10,8 @@
     "wallpaperSlideTime": 1519442460788,
     "wallpaperSlideIndex": 8,
     "openMax": 9,
-    "idCounter": 140,
-    "themeColor": "rgba(2,35,64,1)",
+    "idCounter": 148,
+    "themeColor": "rgba(24,28,71,1)",
     "autoThemeColor": true,
     "wallpapers": [
       {
@@ -115,7 +115,6 @@
       "title": "系统设置",
       "url": "./res/apps/yl-system/index.html",
       "customTile": "",
-      "resizable": true,
       "urlRandomToken": true
     },
     "yl-color-picker": {
@@ -140,7 +139,7 @@
       },
       "version": "1.0.0",
       "poweredBy": "Yuri2",
-      "resizable": true,
+      "resizable": false,
       "single": true,
       "size": {
         "width": "207",
@@ -149,7 +148,6 @@
       "title": "取色器",
       "url": "./res/apps/colorPicker/colorPicker.html",
       "customTile": "",
-      "resizable": false,
       "urlRandomToken": true
     },
     "yl-browser": {
@@ -183,7 +181,6 @@
       "title": "浏览器",
       "url": "./res/apps/browser/index.html",
       "customTile": "",
-      "resizable": true,
       "urlRandomToken": true
     },
     "yl-app-store": {
@@ -217,7 +214,6 @@
       "title": "应用商店",
       "url": "https://appstore.ylui.yuri2.cn",
       "customTile": "",
-      "resizable": true,
       "urlRandomToken": true
     },
     "yl-app-home": {
@@ -251,7 +247,6 @@
       "title": "YLUI 官网",
       "url": "https://ylui.yuri2.cn",
       "customTile": "",
-      "resizable": true,
       "urlRandomToken": true
     },
     "yl-server": {
@@ -285,7 +280,6 @@
       "title": "YLUI官方后台服务",
       "url": "https://server.ylui.yuri2.cn",
       "customTile": "",
-      "resizable": true,
       "urlRandomToken": true
     }
   },
@@ -314,10 +308,10 @@
       "title": "系统",
       "data": [
         {
-          "x": 0,
-          "y": 0,
-          "w": 6,
-          "h": 3,
+          "x": 4,
+          "y": 6,
+          "w": 2,
+          "h": 2,
           "app": "yl-app-store",
           "title": "应用商店",
           "i": "91",
@@ -326,25 +320,43 @@
         },
         {
           "x": 0,
-          "y": 3,
-          "w": 2,
-          "h": 2,
+          "y": 4,
+          "w": 4,
+          "h": 4,
           "app": "yl-system",
           "title": "系统设置",
           "i": "110",
           "params": {},
           "hash": ""
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "w": 2,
+          "h": 2,
+          "app": "yl-browser",
+          "title": "浏览器",
+          "i": "146",
+          "params": {},
+          "hash": ""
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 4,
+          "app": "yl-app-home",
+          "title": "YLUI 官网",
+          "i": "147",
+          "params": {},
+          "hash": ""
         }
       ]
-    },
-    {
-      "title": "工具",
-      "data": []
     }
   ],
   "startMenu": {
-    "width": 900,
-    "height": 600,
+    "width": 651,
+    "height": 606,
     "sidebar": [
       {
         "app": "yl-browser",

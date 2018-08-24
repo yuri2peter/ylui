@@ -1,11 +1,12 @@
 #yl .tiles-box{
     position: absolute;
-    height: calc(100% - 16px);
+    height: calc(100% - 24px);
     padding: 8px 16px;
     padding-right: 0;
     overflow-y: auto;
     overflow-x: hidden;
     width: calc(100% - 328px);
+    top: 16px;
     transition:left 0.3s ;
     /*column-count: 3;*/
 }

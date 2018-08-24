@@ -174,7 +174,8 @@ YL.render = function (data) {
         that.runtime.desktopSize.height = clientSize.height - 40;
         that.runtime.isSmallScreen = clientSize.width <= 768;
         that.runtime.isHorizontalScreen = clientSize.width > clientSize.height;
-        that.runtime.startMenu.width = clientSize.width > that.startMenu.width ? that.startMenu.width : clientSize.width;
+        that.runtime.startMenu.width = clientSize.width > that.startMenu.width && !that.runtime.isSmallScreen
+          ? that.startMenu.width : clientSize.width;
         that.runtime.startMenu.height = that.runtime.desktopSize.height > that.startMenu.height && !that.runtime.isSmallScreen
           ? that.startMenu.height : that.runtime.desktopSize.height;
   
