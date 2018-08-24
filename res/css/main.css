@@ -1045,7 +1045,11 @@ body {
     cursor: ne-resize;
     z-index: 99;
 }
-
+#yl .startMenu.topTaskBar .startMenu-resize {
+    top: auto;
+    bottom: 0;
+    cursor: se-resize;
+}
 #yl .center {
     color: white;
     /*background-color: rgba(0, 0, 0, 0.82);*/
