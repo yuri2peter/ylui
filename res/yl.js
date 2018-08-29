@@ -528,7 +528,7 @@ window.YL = {
   f5: function () {
     YL.static.beforeOnloadEnable = false;
     var parsed = Yuri2.parseURL(location.href);
-    location.href = parsed.protocol + "://" + parsed.host + parsed.path;
+    location.href = parsed.protocol + "://" + parsed.host + ":" + parsed.port + parsed.path;
   },
   setWallpaper: function (urlImg) {
     this.vue.configs.wallpaper = urlImg;
