@@ -1,7 +1,7 @@
 window.YL = {
   info: {
     softwareName: 'YLUI',
-    version: "2.1.0",
+    version: "2.1.1",
     iconBtnStart: 'yoast',
     author: 'Yuri2',
     contactInformation: 'yuri2peter@qq.com',
@@ -1002,6 +1002,13 @@ window.YL = {
     maxmize: function (params, id) {
       YL.vue.winMaximize(params ? params : id);
     },
+    hide: function (params, id) {
+      YL.vue.winMinimize(params ? params : id);
+    },
+    show: function (params, id) {
+      YL.vue.winShow(params ? params : id);
+      YL.vue.winSetActive(params ? params : id);
+    },
     restore: function (params, id) {
       YL.vue.winRestore(params ? params : id);
     },
@@ -1144,27 +1151,31 @@ window.YL = {
         }
       }
     },
-    historyBack: function (id) {
-      var win = YL.vue.wins[id];
+    historyBack: function (data, id) {
+      var winId = data || id;
+      var win = YL.vue.wins[winId];
       var h = win.history;
-      if (this.historyBackAvaliable(id)) {
+      if (this.historyBackAvaliable(winId)) {
         win.url = win.urlBar = h.urls[--h.pos];
       }
     },
-    historyBackAvaliable: function (id) {
-      var win = YL.vue.wins[id];
+    historyBackAvaliable: function (data, id) {
+      var winId = data || id;
+      var win = YL.vue.wins[winId];
       var h = win.history;
       return h.pos > 0 && h.urls[h.pos - 1];
     },
-    historyForward: function (id) {
-      var win = YL.vue.wins[id];
+    historyForward: function (data, id) {
+      var winId = data || id;
+      var win = YL.vue.wins[winId];
       var h = win.history;
-      if (this.historyForwardAvaliable(id)) {
+      if (this.historyForwardAvaliable(winId)) {
         win.url = win.urlBar = h.urls[++h.pos];
       }
     },
-    historyForwardAvaliable: function (id) {
-      var win = YL.vue.wins[id];
+    historyForwardAvaliable: function (data, id) {
+      var winId = data || id;
+      var win = YL.vue.wins[winId];
       var h = win.history;
       var posMax = h.urls.length - 1;
       return h.pos < posMax && h.urls[h.pos + 1];
