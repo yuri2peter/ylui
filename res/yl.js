@@ -958,6 +958,9 @@ window.YL = {
     getID: function () {
       return YL.util.getID();
     },
+    getVersion: function () {
+      return YL.info.version;
+    },
     refresh: function (id, idSelf) {
       id = id || idSelf;
       YL.vue.winRefresh(id);

@@ -18,7 +18,7 @@
 ### 版本更新
 2.1.2
 - 过滤其他窗体事件类型
-- 新增子窗体API `simpleMsg`
+- 新增子窗体API `simpleMsg`, `getVersion`
 
 2.1.1
 - 新增子窗体的`hide`,`show`方法，详见文档`7.3窗体API`
