@@ -1,7 +1,7 @@
 window.YL = {
   info: {
     softwareName: 'YLUI',
-    version: "2.1.1",
+    version: "2.1.2",
     iconBtnStart: 'yoast',
     author: 'Yuri2',
     contactInformation: 'yuri2peter@qq.com',

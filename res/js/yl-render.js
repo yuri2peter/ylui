@@ -16,6 +16,7 @@ YL.render = function (data) {
       return false;
     };
     var data = e.originalEvent.data;
+    if ($.inArray(data.type, ["ylui-pong", "ylui-eval", "ylui-emit"]) < 0) { return; }
     var from = data.from;
     var id = from[0];
     var wins = YL.vue.wins;
