@@ -1015,6 +1015,9 @@ window.YL = {
     msg: function (data) {
       YL.msg(data[0], data[1]);
     },
+    simpleMsg: function (data) {
+      YL.util.simpleMsg(data);
+    },
     setAppBadge: function (data, id) {
       var v = YL.vue;
       var app = (Yuri2.isArray(data)) ? v.apps[data[0]] : YL.util.getAppByWinId(id);
