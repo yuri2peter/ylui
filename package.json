@@ -1,8 +1,8 @@
 {
-  "name": "YLUI",
+  "name": "ylui",
   "main": "index.html",
   "description": "新一代云桌面",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "window": {
     "title": "YLUI",
     "icon": "link.png",
