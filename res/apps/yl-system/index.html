@@ -115,10 +115,11 @@
                             </el-form-item>
                             <el-form-item :label="YL.lang('IconType')">
                                 <el-select v-model="appSetting.icon.type" :placeholder="YL.lang('PleaseChoose')" size="mini">
-                                    <el-option label="FontAwesome" value="fa"></el-option>
+                                    <el-option label="Font Awesome" value="fa"></el-option>
                                     <el-option :label="YL.lang('Initial')" value="str"></el-option>
                                     <el-option :label="YL.lang('Image')" value="img"></el-option>
                                 </el-select>
+                                <el-button @click="YL.open('ylui-fa')" v-show="appSetting.icon.type === 'fa'" plain size="mini" icon="el-icon-search" />
                             </el-form-item>
                             <el-form-item :label="YL.lang('IconContent')">
                                 <el-input spellcheck="false" v-model="appSetting.icon.content" size="mini"></el-input>

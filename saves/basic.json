@@ -10,7 +10,7 @@
     "wallpaperSlideTime": 1519442460788,
     "wallpaperSlideIndex": 8,
     "openMax": 9,
-    "idCounter": 164,
+    "idCounter": 170,
     "themeColor": "rgba(2,35,64,1)",
     "autoThemeColor": true,
     "wallpapers": [
@@ -376,6 +376,39 @@
       "url": "https://github.com:/yuri2peter/ylui",
       "customTile": "",
       "urlRandomToken": false
+    },
+    "ylui-fa": {
+      "addressBar": false,
+      "autoRun": 0,
+      "background": false,
+      "badge": 0,
+      "desc": "",
+      "icon": {
+        "type": "fa",
+        "content": "flag",
+        "bg": "rgb(53,154,238)"
+      },
+      "openMode": "normal",
+      "plugin": false,
+      "position": {
+        "autoOffset": true,
+        "left": true,
+        "top": true,
+        "x": "x*0.05",
+        "y": "y*0.05"
+      },
+      "version": "1.0.0",
+      "poweredBy": "Font Awesome",
+      "resizable": true,
+      "single": true,
+      "size": {
+        "height": "y*0.8-80",
+        "width": "x*0.8"
+      },
+      "title": "Font Awesome",
+      "url": "https://fontawesome.com:/cheatsheet",
+      "customTile": "",
+      "urlRandomToken": true
     }
   },
   "shortcuts": [
