@@ -3,3 +3,5 @@
 /unpackage/
 /test/
 /saves/test.json
+/node_modules/
+/package-lock.json

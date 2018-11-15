@@ -15,9 +15,22 @@ YLUI是一款纯前端框架，是对WEB桌面UI的一个大胆尝试。
 
 ### 快速开始
 
-1. 将代码部署至您的web服务目录，如nginx、apache。
-2. 修改配置文件`/configs.js`
-3. 浏览器访问对应地址，通常形如`http://127.0.0.1/ylui/`
+#### http-server预览（推荐）
+
+需要已安装Node.js+npm环境。
+
+在项目目录输入命令：
+
+```
+npm i
+npm start
+```
+
+根据提示访问对应网址。
+
+#### 借助web服务环境
+
+将代码部署至您的web服务目录，如nginx、apache服务器的www目录下，访问对应网址（如`http://127.0.0.1/ylui/`）。
 
 > 更多使用说明，请参阅本地文档`/documents`或[在线文档](https://github.com/yuri2peter/ylui/tree/master/documents)。
 

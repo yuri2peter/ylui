@@ -1,8 +1,15 @@
 {
   "name": "ylui",
   "main": "index.html",
-  "description": "新一代云桌面",
+  "description": "高度可扩展桌面UI",
   "version": "2.1.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuri2peter/ylui"
+  },
+  "scripts": {
+    "start": "http-server"
+  },
   "window": {
     "title": "YLUI",
     "icon": "link.png",
@@ -23,5 +30,8 @@
     "plugin": true,
     "java": false,
     "page-cache": false
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
   }
 }
