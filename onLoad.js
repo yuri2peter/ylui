@@ -9,7 +9,7 @@ YL.onLoad(function () {
   // 读取url中load参数，如localhost/ylui/index.html?load=basic
   var load = Yuri2.parseURL().params.load;
   // 当load === 'ylui-storage'时，尝试加载浏览器缓存
-  if (load === YL.static.localStorageName) {
+  if (load === YL.static.localStorageName && localStorage.getItem(YL.static.localStorageName)) {
     YL.onReady(function () {
       setTimeout(function () {
         YL.msg("欢迎访问" + YL.static.softwareName, Yuri2.template("当前版本:${0}<br/>已读取本地缓存", YL.static.version));
