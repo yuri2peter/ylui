@@ -1,7 +1,7 @@
 window.YL = {
   info: {
     softwareName: 'YLUI',
-    version: "2.1.2",
+    version: "2.1.3",
     iconBtnStart: 'yoast',
     author: 'Yuri2',
     contactInformation: 'yuri2peter@qq.com',
@@ -113,7 +113,7 @@ window.YL = {
   },
   init: function (data) {
     //数据处理
-    data = data ? data : (localStorage.getItem("ylui-storage") ? (JSON.parse(localStorage.getItem("ylui-storage"))) : this._baseData());
+    data = data ? data : (localStorage.getItem(YL.static.localStorageName) ? (JSON.parse(localStorage.getItem(YL.static.localStorageName))) : this._baseData());
     data = YL.format(data);
     $("#loading").remove();
     YL.render(data);
@@ -527,8 +527,7 @@ window.YL = {
   },
   f5: function () {
     YL.static.beforeOnloadEnable = false;
-    var parsed = Yuri2.parseURL(location.href);
-    location.href = parsed.protocol + "://" + parsed.host + ":" + parsed.port + parsed.path;
+    location.reload();
   },
   setWallpaper: function (urlImg) {
     this.vue.configs.wallpaper = urlImg;
