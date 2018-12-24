@@ -21,6 +21,7 @@
 
 - 可选url参数，使用本地缓存初始化桌面。如http://demo.ylui.yuri2.cn/?load=ylui-storage
 - onLoad文件更好的注释，以及针对加载缓存的更新
+- 修正子菜单没有缩进的bug
 
 2.1.2
 
