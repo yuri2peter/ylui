@@ -119,7 +119,8 @@
                                     <el-option :label="YL.lang('Initial')" value="str"></el-option>
                                     <el-option :label="YL.lang('Image')" value="img"></el-option>
                                 </el-select>
-                                <el-button @click="YL.open('ylui-fa')" v-show="appSetting.icon.type === 'fa'" plain size="mini" icon="el-icon-search" />
+                                <el-button @click="YL.open('ylui-fa')" v-show="appSetting.icon.type === 'fa'" plain size="mini" icon="el-icon-search" style="margin-left: 10px"></el-button>
+                                <el-button @click="YL.open('ylui-image-host')" v-show="appSetting.icon.type === 'img'" plain size="mini" icon="el-icon-upload" ></el-button>
                             </el-form-item>
                             <el-form-item :label="YL.lang('IconContent')">
                                 <el-input spellcheck="false" v-model="appSetting.icon.content" size="mini"></el-input>
@@ -303,6 +304,9 @@
                 <el-button @click="btnAddBgClick" size="medium"
                            style="width: 81px;border-radius: inherit;font-size: 12px;">{{YL.lang('Add')}}
                 </el-button>
+                <el-button @click="YL.open('ylui-image-host')"
+                           style="border-radius: inherit;margin-left: 13px;font-size: 12px;"
+                           size="medium" icon="el-icon-upload" ></el-button>
             </p>
 
             <div class="img-bg-preview">

@@ -409,6 +409,39 @@
       "url": "https://fontawesome.com:/cheatsheet",
       "customTile": "",
       "urlRandomToken": true
+    },
+    "ylui-image-host": {
+      "addressBar": false,
+      "autoRun": 0,
+      "background": false,
+      "badge": 0,
+      "desc": "",
+      "icon": {
+        "type": "fa",
+        "content": "image",
+        "bg": "#72b076"
+      },
+      "openMode": "normal",
+      "plugin": false,
+      "position": {
+        "autoOffset": true,
+        "left": true,
+        "top": true,
+        "x": "x*0.05",
+        "y": "y*0.05"
+      },
+      "version": "1.0.0",
+      "poweredBy": "imgchr.com",
+      "resizable": true,
+      "single": true,
+      "size": {
+        "height": "y*0.8-80",
+        "width": "x*0.8"
+      },
+      "title": "路过图床",
+      "url": "https://imgchr.com/",
+      "customTile": "",
+      "urlRandomToken": true
     }
   },
   "shortcuts": [
