@@ -720,10 +720,6 @@ body {
     background-size: 100% auto;
 }
 
-#yl.horizontal-screen.small-screen .desktop .background {
-    background-size: 100% 100%;
-}
-
 #yl .drawer {
     position: absolute;
     width: 40%;
@@ -731,7 +727,6 @@ body {
     min-height: 240px;
     left: 50%;
     top: 50%;
-    /*box-shadow: 0 0 16px rgba(255, 255, 255, 0.26);*/
     border: 1px solid rgba(255, 255, 255, 0.54);
     max-height: 500px;
     overflow: auto;

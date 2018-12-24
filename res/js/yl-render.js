@@ -166,7 +166,7 @@ YL.render = function (data) {
       },
       onResize: function () {
         var that = this;
-  
+
         //屏幕尺寸
         var clientSize = Yuri2.getClientSize();
         that.runtime.clientSize.width = clientSize.width;
@@ -179,7 +179,7 @@ YL.render = function (data) {
           ? that.startMenu.width : clientSize.width;
         that.runtime.startMenu.height = that.runtime.desktopSize.height > that.startMenu.height && !that.runtime.isSmallScreen
           ? that.startMenu.height : that.runtime.desktopSize.height;
-  
+
         //计算磁贴尺寸
         var widthFixed = that.runtime.startMenu.width - (that.runtime.isSmallScreen ? 80 : 328);
         var groupNum = 1;//多少列
@@ -202,13 +202,13 @@ YL.render = function (data) {
         }
         that.runtime.tileSize = size;
         that.runtime.tilesWidth = (size + 4) * 6;
-  
+
         //计算桌面网格尺寸
         that.runtime.shortcutWidth = that.runtime.isSmallScreen ? 56 : 68;
         that.runtime.shortcutHeight = that.runtime.isSmallScreen ? 70 : 90;
         that.runtime.shortcutsGrid.x = parseInt(that.runtime.desktopSize.width / that.runtime.shortcutWidth);
         that.runtime.shortcutsGrid.y = parseInt(that.runtime.desktopSize.height / that.runtime.shortcutHeight);
-  
+
         //给窗体发送resize事件
         that.emitWinEvent(0, 'resize',{
           width:that.runtime.desktopSize.width,

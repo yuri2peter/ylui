@@ -820,7 +820,6 @@ window.YL = {
     imgUrlToSize: function (url, cb) {
       var img = new Image;
       img.src = url;
-      img.crossOrigin = 'anonymous';//跨域声明（只在chrome和firefox有效——吗？）
       img.onload = function () {
         if (cb) {
           cb({
