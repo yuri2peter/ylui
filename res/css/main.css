@@ -959,7 +959,8 @@ body {
 }
 
 #yl .startMenu .menu .item:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    padding-left: 2px;
 }
 
 #yl .startMenu .menu .item .icon {
@@ -971,7 +972,6 @@ body {
     font-size: 22px;
     line-height: 30px;
     top: 2px;
-    left: 1px;
 }
 
 #yl .startMenu .menu .item .icon-drawer {
@@ -979,9 +979,6 @@ body {
     width: 30px;
     height: 30px;
     position: absolute;
-    /* text-align: center; */
-    /* font-size: 22px; */
-    /* line-height: 30px; */
     top: 2px;
     padding: 0;
     margin: 0;
