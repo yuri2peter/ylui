@@ -252,7 +252,7 @@ body {
 }
 
 #yl .desktop .win .bar .title {
-    width: calc(100% - 196px);
+    width: calc(100% - 156px);
     height: inherit;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -331,7 +331,7 @@ body {
 }
 
 #yl .desktop .win .bar .tools {
-    width: 164px;
+    width: 120px;
     float: right;
     cursor: default;
     text-align: right;
@@ -343,21 +343,20 @@ body {
     width: 110px;
 }
 
-/*#yl .desktop .win.plugin .bar .tools{*/
-/*width: 86px;*/
-/*}*/
 #yl .desktop .win .bar .tools .tool {
-    color: white;
-    display: inline-block;
+    display: block;
+    float: left;
     width: 40px;
-    line-height: 40px;
-    text-align: center;
+    height: 40px;
     cursor: pointer;
     transition: all 0.3s;
+    background-size: 14px;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #yl .desktop .win .bar .tools .tool:hover {
-    background-color: rgba(255, 255, 255, 0.34);
+    background-color: rgba(255, 255, 255, 0.19);
 }
 
 #yl .desktop .win .bar .tools .tool.close:hover {
@@ -585,7 +584,7 @@ body {
     transition: all 0.5s;
     float: left;
     height: 100%;
-    padding: 0 10px;
+    padding: 0 6px;
     position: relative;
     margin-right: 1px;
 }
@@ -1197,4 +1196,9 @@ body {
     bottom: 0;
     height: 24px;
     width: 100%;
+}
+
+#yl-btn-center {
+    background: url(../../res/img/icon/message.svg) center 56% no-repeat;
+    background-size: 22px;
 }

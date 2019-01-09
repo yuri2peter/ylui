@@ -168,14 +168,16 @@
                             {{w.title}}
                         </div>
                         <div class="tools">
-                            <i class="tool iconfont icon-weibiaoti-3" @click="winMinimize(id)"></i>
-                            <i v-if="!w.plugin&&w.state==='normal'&&w.resizable&&!runtime.isSmallScreen"
-                               class="tool iconfont icon-weibiaoti-" style="font-size: 14px"
-                               @click="winMaximize(id)"></i>
-                            <i v-if="!w.plugin&&w.state==='max'&&!runtime.isSmallScreen"
-                               class="tool iconfont icon-weibiaoti-1"
-                               @click="winRestore(id)"></i>
-                            <i class="tool close iconfont icon-weibiaoti-2" @click="winClose(id)"></i>
+                            <span style="background-image: url('./res/img/icon/minimize.svg')" class="tool" @click="winMinimize(id)" ></span>
+                            <span v-if="!w.plugin&&w.state==='normal'&&w.resizable&&!runtime.isSmallScreen"
+                                  style="background-image: url('./res/img/icon/maximize.svg')"
+                                 class="tool"
+                                 @click="winMaximize(id)"  ></span>
+                            <span v-if="!w.plugin&&w.state==='max'&&!runtime.isSmallScreen"
+                                 class="tool"
+                                  style="background-image: url('./res/img/icon/restore.svg')"
+                                 @click="winRestore(id)"  ></span>
+                            <span class="tool close" @click="winClose(id)" style="background-image: url('./res/img/icon/close.svg')"  ></span>
                         </div>
                         <div style="clear: both"></div>
                     </div>
@@ -233,7 +235,7 @@
         <div class="btn win-task" @click="winTaskClick(id)"
              :class="{active:id===runtime.winActive&&!winIsMin(id),shadow:id===runtime.winActive&&!winIsMin(id)}"
              v-for="(w,id) in wins" v-if="!w.plugin" @contextMenu="winContextMenu(id,$event)"
-             :style="{'width':parseInt((runtime.clientSize.width-250+(runtime.isSmallScreen?80:0))/runtime.winOpened)+'px'}">
+             :style="{'width':parseInt((runtime.clientSize.width-210+(runtime.isSmallScreen?80:0))/runtime.winOpened)+'px'}">
             <yl-icon :icon="w.icon"></yl-icon>
             <div class="title">{{w.title}}</div>
             <div class="line"></div>
@@ -244,7 +246,7 @@
              :class="{'fa-exchange':smallScreenAndMenuOpend}"
              class="btn shadow-hover fa fa-fw"></div>
         <!--消息-->
-        <div id="yl-btn-center" class="btn shadow-hover fa fa-fw fa-comment-o" style="float: right"
+        <div id="yl-btn-center" class="btn shadow-hover " style="float: right"
              @click="btnCenterClick()">
             <div class="badge"
                  :style="{bottom:configs.topTaskBar?'-18px':'none',top:configs.topTaskBar?'auto':'0'}"
@@ -253,8 +255,9 @@
         </div>
         <!--时间-->
         <div class="btn shadow-hover" v-show="!runtime.isSmallScreen" v-html="runtime.time"
+             :title="runtime.date && runtime.date.toLocaleString()"
              @click="runtime.CalendarOpen=!runtime.CalendarOpen;runtime.pluginIconsOpen=false;"
-             style="font-size: 12px;line-height: 20px;float: right"></div>
+             style="font-size: 12px;float: right"></div>
         <!--托盘按钮-->
         <div class="btn shadow-hover fa fa-fw "
              :class="{'fa-angle-up':!configs.topTaskBar,'fa-angle-down':configs.topTaskBar}"

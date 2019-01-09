@@ -235,7 +235,8 @@ YL.render = function (data) {
             if (mins < 10) {
               mins = '0' + mins
             }
-            that.runtime.time = (hours + ':' + mins + '<br/>' + year + '/' + month + '/' + date);
+            that.runtime.time = (hours + ':' + mins);
+            that.runtime.date = myDate;
           }, 1000);
         }
 

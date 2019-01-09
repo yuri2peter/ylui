@@ -1,7 +1,7 @@
 window.YL = {
   info: {
     softwareName: 'YLUI',
-    version: "2.1.4",
+    version: "2.1.5",
     iconBtnStart: 'yoast',
     author: 'Yuri2',
     contactInformation: 'yuri2peter@qq.com',
@@ -363,7 +363,7 @@ window.YL = {
     //资源加载
     var that = this;
     var pathRes = './res';
-    var counterLoad = 0, maxLoad = 25; //资源加载计数器
+    var counterLoad = 0, maxLoad = 24; //资源加载计数器
     var onLoading = "...";
 
 
@@ -444,10 +444,6 @@ window.YL = {
     });
     YL.util.loadScript(pathRes + '/js/Yuri2.js', function () {
       onLoading = 'Yuri2.js';
-      counterLoad++;
-    });
-    YL.util.loadStyle(pathRes + '/components/icon-font/iconfont.css', function () {
-      onLoading = 'iconfont.css';
       counterLoad++;
     });
     YL.util.loadStyle(pathRes + '/components/font-awesome-4.7.0/css/font-awesome.min.css', function () {
