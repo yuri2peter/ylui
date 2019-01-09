@@ -524,8 +524,11 @@ body {
     background-color: transparent;
     top: auto;
     bottom: 40px;
-    right: 80px;
+    right: 36px;
     min-height: 32px;
+}
+#yl.small-screen  .bar .plugin-icons {
+    right: 22px;
 }
 
 #yl .bar .plugin-icon {
@@ -534,7 +537,6 @@ body {
     width: 32px;
     height: 32px;
     padding: 2px;
-    /*background-color: rgba(44, 44, 44, 0.73);*/
 }
 
 #yl .bar .plugin-icon .icon {
