@@ -347,18 +347,25 @@ YL.render = function (data) {
         //F5刷新激活子页
         if (first) {
           var f5_check = function (e) {
-            e = e || window.event; //alert(e.which||e.keyCode);
+            e = e || window.event;
+            if (e.ctrlKey && ((e.which || e.keyCode) === 116)) {
+              // 强制刷新，清除缓存
+              YL.static.beforeOnloadEnable = false;
+              return;
+            }
             if ((e.which || e.keyCode) === 116) {
               if (e.preventDefault) {
                 e.preventDefault();
               } else {
-                event.keyCode = 0;
+                e.keyCode = 0;
                 e.returnValue = false;
               }
-              if (that.runtime.winActive)
+              if (that.runtime.winActive) {
                 that.winRefresh(that.runtime.winActive);
-              else
+              }
+              else {
                 that.flash();
+              }
             }
           };
           if (document.addEventListener) {
@@ -581,7 +588,7 @@ YL.render = function (data) {
             break;
         }
         //记录激活的id
-        this.runtime.winActive = winID;
+        if (!win.min) this.runtime.winActive = winID;
         that.$nextTick(function () {
           //发送post消息,通知被分配的窗口id
           var itvPing = setInterval(function () {

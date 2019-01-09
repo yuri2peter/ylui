@@ -331,16 +331,11 @@ body {
 }
 
 #yl .desktop .win .bar .tools {
-    width: 120px;
     float: right;
     cursor: default;
     text-align: right;
     height: 40px;
     overflow: hidden;
-}
-
-#yl .desktop .win .bar.no-max .tools {
-    width: 110px;
 }
 
 #yl .desktop .win .bar .tools .tool {
