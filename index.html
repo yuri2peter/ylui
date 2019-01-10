@@ -153,6 +153,15 @@
                  :style="winStyle(id)">
                 <div v-if="!w.plugin&&w.init" class="init" :style="{'background-color':w.icon.bg}">
                     <yl-icon :icon="w.icon" :badge="0" :style="winInitIconStyle(id)"></yl-icon>
+                    <div class="load-3">
+                        <div v-if="!runtime.isSmallScreen" class="k-line2 k-line12-2" style="animation-delay: .7s"></div>
+                        <div v-if="!runtime.isSmallScreen" class="k-line2 k-line12-3" style="animation-delay: .6s"></div>
+                        <div class="k-line2 k-line12-4" style="animation-delay: .5s"></div>
+                        <div class="k-line2 k-line12-5" style="animation-delay: .4s"></div>
+                        <div class="k-line2 k-line12-6" style="animation-delay: .3s"></div>
+                        <div class="k-line2 k-line12-7" style="animation-delay: .2s"></div>
+                        <div class="k-line2 k-line12-8" style="animation-delay: .1s"></div>
+                    </div>
                 </div>
                 <div class="bar-box" v-show="!w.init">
                     <div class="bar" :class="{'no-max':w.plugin||!w.resizable}">

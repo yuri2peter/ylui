@@ -617,6 +617,23 @@ YL.render = function (data) {
           if (!win.min) {
             ifr.focus();
           }
+
+          // 加载完毕关闭封面
+          var created = new Date().getTime();
+          var closeInit = function () {
+            var now = new Date().getTime();
+            var delay = now - created > 1000 ? 0 : 1000;
+            setTimeout(function () {
+              win.init = false;
+            }, delay);
+          };
+          if (ifr.attachEvent) {
+            // IE
+            ifr.attachEvent("onload", closeInit);
+          } else {
+            // NOT IE
+            ifr.onload = closeInit;
+          }
         });
 
         //如果是手机屏幕，最大化
@@ -624,9 +641,10 @@ YL.render = function (data) {
           that.winMaximize(winID);
         }
 
+        // 超时关闭封面
         setTimeout(function () {
           win.init = false;
-        }, 1000);
+        }, 10000);
 
         return winID;
       },
