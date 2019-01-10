@@ -285,7 +285,7 @@ body {
 
 #yl .desktop .win.addressBar-hidden .init {
     height: 100%;
-    top: -1px;
+    top: 0;
 }
 
 #yl .desktop .win .init .icon {

@@ -151,7 +151,7 @@
                  @mousedown="winSetActive(id)"
                  :class="winClass(id)"
                  :style="winStyle(id)">
-                <div v-if="!w.plugin&&w.init" class="init" :style="{'background-color':w.icon.bg}">
+                <div v-if="!w.plugin&&w.init" class="init" :style="{'background-color':w.icon.bg || configs.themeColor}">
                     <yl-icon :icon="w.icon" :badge="0" :style="winInitIconStyle(id)"></yl-icon>
                     <div class="load-3">
                         <div v-if="!runtime.isSmallScreen" class="k-line2 k-line12-2" style="animation-delay: .7s"></div>
@@ -166,7 +166,7 @@
                 <div class="bar-box">
                     <div class="bar" :class="{'no-max':w.plugin||!w.resizable}">
                         <div class="mask bar-mask"></div>
-                        <div class="mask" :style="{background:configs.themeColor}" style="opacity: 0.9"></div>
+                        <div class="mask" :style="{background:w.init?(w.icon.bg || configs.themeColor):configs.themeColor, opacity:w.init?1:0.9}" ></div>
                         <!--标题栏-->
                         <div class="title" :title="w.title"
                              @contextMenu="winContextMenu(id,$event)"
