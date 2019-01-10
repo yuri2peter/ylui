@@ -277,7 +277,7 @@ body {
     position: absolute;
     width: 100%;
     height: calc(100% + 40px);
-    top: -40px;
+    top: -41px;
     left: 0;
     z-index: 2;
     background-color: #BBB5B5;
@@ -285,7 +285,7 @@ body {
 
 #yl .desktop .win.addressBar-hidden .init {
     height: 100%;
-    top: 0;
+    top: -1px;
 }
 
 #yl .desktop .win .init .icon {
@@ -295,7 +295,6 @@ body {
     line-height: 20px;
     text-align: center;
     color: white;
-
     left: 50%;
     top: 35%;
     transform: translate(-50%, -50%);
