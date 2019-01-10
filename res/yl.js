@@ -1,7 +1,7 @@
 window.YL = {
   info: {
     softwareName: 'YLUI',
-    version: "2.1.6",
+    version: window.yluiVersion,
     iconBtnStart: 'yoast',
     author: 'Yuri2',
     contactInformation: 'yuri2peter@qq.com',
@@ -399,17 +399,18 @@ window.YL = {
     }, 200);
 
     /**  加载资源 */
+    const versionTail = "?v=" + YL.info.version;
     //jq
     YL.util.loadScript(pathRes + '/components/jquery-2.2.4.min.js', function () {
       onLoading = 'jquery-2.2.4.min.js';
       counterLoad++;
 
       //contextMenu
-      YL.util.loadScript(pathRes + '/components/contextMenu/contextMenu.js', function () {
+      YL.util.loadScript(pathRes + '/components/contextMenu/contextMenu.js' + versionTail, function () {
         onLoading = 'contextMenu.js';
         counterLoad++;
       });
-      YL.util.loadStyle(pathRes + '/components/contextMenu/contextMenu.css', function () {
+      YL.util.loadStyle(pathRes + '/components/contextMenu/contextMenu.css' + versionTail, function () {
         onLoading = 'contextMenu.css';
         counterLoad++;
       });
@@ -422,27 +423,27 @@ window.YL = {
         counterLoad++;
       });
     });
-    YL.util.loadStyle(pathRes + '/css/main.css', function () {
+    YL.util.loadStyle(pathRes + '/css/main.css' + versionTail, function () {
       onLoading = 'main.css';
       counterLoad++;
     });
-    YL.util.loadStyle(pathRes + '/css/yl-layer-skin.css', function () {
+    YL.util.loadStyle(pathRes + '/css/yl-layer-skin.css' + versionTail, function () {
       onLoading = 'yl-layer-skin.css';
       counterLoad++;
     });
-    YL.util.loadStyle(pathRes + '/components/layer-v3.0.3/layer/skin/default/layer.css', function () {
+    YL.util.loadStyle(pathRes + '/components/layer-v3.0.3/layer/skin/default/layer.css' + versionTail, function () {
       onLoading = 'layer.css';
       counterLoad++;
     });
-    YL.util.loadStyle(pathRes + '/css/tiles.css', function () {
+    YL.util.loadStyle(pathRes + '/css/tiles.css' + versionTail, function () {
       onLoading = 'tiles.css';
       counterLoad++;
     });
-    YL.util.loadStyle(pathRes + '/components/animate.css', function () {
+    YL.util.loadStyle(pathRes + '/components/animate.css' + versionTail, function () {
       onLoading = 'animate.css';
       counterLoad++;
     });
-    YL.util.loadScript(pathRes + '/js/Yuri2.js', function () {
+    YL.util.loadScript(pathRes + '/js/Yuri2.js' + versionTail, function () {
       onLoading = 'Yuri2.js';
       counterLoad++;
     });
@@ -474,29 +475,29 @@ window.YL = {
         onLoading = 'vue-grid-layout.min.js';
         counterLoad++;
       });
-      YL.util.loadScript(pathRes + '/js/yl-vue-component-icon.js', function () {
+      YL.util.loadScript(pathRes + '/js/yl-vue-component-icon.js' + versionTail, function () {
         onLoading = 'yl-vue-component-icon.js';
         counterLoad++;
       });
-      YL.util.loadScript(pathRes + '/js/yl-vue-components.js', function () {
+      YL.util.loadScript(pathRes + '/js/yl-vue-components.js' + versionTail, function () {
         onLoading = 'yl-vue-components.js';
         counterLoad++;
       });
 
     });
-    YL.util.loadScript(pathRes + '/js/yl-render.js', function () {
+    YL.util.loadScript(pathRes + '/js/yl-render.js' + versionTail, function () {
       onLoading = 'yl-render';
       counterLoad++;
     });
-    YL.util.loadScript(pathRes + '/js/yl-io.js', function () {
+    YL.util.loadScript(pathRes + '/js/yl-io.js' + versionTail, function () {
       onLoading = 'yl-io';
       counterLoad++;
     });
-    YL.util.loadScript(pathRes + '/components/calendar/script.js', function () {
+    YL.util.loadScript(pathRes + '/components/calendar/script.js' + versionTail, function () {
       onLoading = 'calendar.script';
       counterLoad++;
     });
-    YL.util.loadStyle(pathRes + '/components/calendar/style.css', function () {
+    YL.util.loadStyle(pathRes + '/components/calendar/style.css' + versionTail, function () {
       onLoading = 'calendar.style';
       counterLoad++;
     });

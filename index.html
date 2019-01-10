@@ -5,9 +5,12 @@
     <title>...</title>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="./res/css/loading.css"/>
-    <script src="res/yl.js"></script>
-    <script src="onLoad.js"></script>
+    <script>
+        window.yluiVersion = '2.1.7';
+        document.write('<link rel="stylesheet" href="./res/css/loading.css?v='+window.yluiVersion+'"/>');
+        document.write('<script src="res/yl.js?v='+window.yluiVersion+'"><\/script>');
+        document.write('<script src="onLoad.js?v='+window.yluiVersion+'"><\/script>');
+    </script>
 </head>
 <body style="padding: 0;margin: 0;background: black">
 <div id="loading">
