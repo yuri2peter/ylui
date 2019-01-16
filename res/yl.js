@@ -997,7 +997,7 @@ window.YL = {
     minimize: function (params, id) {
       YL.vue.winMinimize(params ? params : id);
     },
-    maxmize: function (params, id) {
+    maximize: function (params, id) {
       YL.vue.winMaximize(params ? params : id);
     },
     hide: function (params, id) {
@@ -1156,11 +1156,11 @@ window.YL = {
       var winId = data || id;
       var win = YL.vue.wins[winId];
       var h = win.history;
-      if (this.historyBackAvaliable(winId)) {
+      if (this.historyBackAvailable(winId)) {
         win.url = win.urlBar = h.urls[--h.pos];
       }
     },
-    historyBackAvaliable: function (data, id) {
+    historyBackAvailable: function (data, id) {
       var winId = data || id;
       var win = YL.vue.wins[winId];
       var h = win.history;
@@ -1170,11 +1170,11 @@ window.YL = {
       var winId = data || id;
       var win = YL.vue.wins[winId];
       var h = win.history;
-      if (this.historyForwardAvaliable(winId)) {
+      if (this.historyForwardAvailable(winId)) {
         win.url = win.urlBar = h.urls[++h.pos];
       }
     },
-    historyForwardAvaliable: function (data, id) {
+    historyForwardAvailable: function (data, id) {
       var winId = data || id;
       var win = YL.vue.wins[winId];
       var h = win.history;

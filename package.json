@@ -2,7 +2,7 @@
   "name": "ylui",
   "main": "index.html",
   "description": "高度可扩展桌面UI",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "repository": {
     "type": "git",
     "url": "https://github.com/yuri2peter/ylui"

@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <script>
-        window.yluiVersion = '2.1.7';
+        window.yluiVersion = '2.1.8';
         document.write('<link rel="stylesheet" href="./res/css/loading.css?v='+window.yluiVersion+'"/>');
         document.write('<script src="res/yl.js?v='+window.yluiVersion+'"><\/script>');
         document.write('<script src="onLoad.js?v='+window.yluiVersion+'"><\/script>');
@@ -195,10 +195,10 @@
                         <div style="clear: both"></div>
                     </div>
                     <div v-show="w.addressBar" class="address-bar">
-                        <i class="btns fa fa-fw fa-arrow-left" :class="{disable:!YL.child.historyBackAvaliable(id)}"
+                        <i class="btns fa fa-fw fa-arrow-left" :class="{disable:!YL.child.historyBackAvailable(id)}"
                            @click="YL.child.historyBack(id)"></i>
                         <i class="btns fa fa-fw fa-arrow-right"
-                           :class="{disable:!YL.child.historyForwardAvaliable(id)}"
+                           :class="{disable:!YL.child.historyForwardAvailable(id)}"
                            @click="YL.child.historyForward(id)"></i>
                         <i class="btns fa fa-fw fa-rotate-right"
                            :class="{disable:!w.childSupport}"
