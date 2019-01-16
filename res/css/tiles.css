@@ -56,7 +56,7 @@
 
 #yl .tiles .vue-grid-item:hover{
     opacity: 1;
-    box-shadow: inset 0 0 0px 2px white;
+    box-shadow: inset 0 0 0 2px white;
 }
 
 #yl .tiles .vue-grid-item.vue-grid-placeholder{
@@ -70,7 +70,7 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 #yl .tiles .vue-grid-item .tile>.mask{
-    height: calc(100% - 1px)
+    height: 100%;
 }
 #yl .tiles .vue-grid-item .tile>.mask>.badge {
     right: 0.2em;

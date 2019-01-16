@@ -51,7 +51,9 @@
 <script type="text/x-template" id="tpl-menu">
     <div class="menu" @contextmenu.self="onMainContextMenu($event)">
         <yl-menu-item
-                v-for="(item, id) in menu"
+                class="animated fadeInUp"
+                :style="{'animation-duration': '0.3s', 'animation-delay': index*0.05+'s'}"
+                v-for="(item, id, index) in menu"
                 :open="true"
                 :item="item"
                 :itemid="id"
@@ -242,6 +244,7 @@
         </div>
         <!--开始按钮-->
         <div class="btn shadow-hover fa fa-fw"
+             style="width: 36px;"
              :class="[ 'fa-'+YL.info.iconBtnStart, {btnStartOpen: startMenu.open } ]"
              @click="if(startMenu.open){hideOpens();}else{hideOpens();startMenu.open=true} "></div>
         <!--子窗口的按钮-->
@@ -386,7 +389,8 @@
                                        :w="tile.w"
                                        :h="tile.h"
                                        :i="tile.i">
-                                <div class="tile"
+                                <div class="tile animated zoomIn"
+                                     :style="{'animation-duration': '0.3s', 'animation-delay': Math.random()/8+'s'}"
                                      :title="tile.title"
                                      @mousedown="tileMouseDown($event)"
                                      @click="tileClick(tile)" @contextMenu="tileContextMenu(groupIndex,i,$event)">

@@ -11,11 +11,6 @@ YL.onLoad(function () {
   var file;
   // 当load === 'ylui-storage'时，尝试加载浏览器缓存
   if (load === YL.static.localStorageName && localStorage.getItem(YL.static.localStorageName)) {
-    YL.onReady(function () {
-      setTimeout(function () {
-        YL.msg("欢迎访问" + YL.static.softwareName, Yuri2.template("当前版本:${0}<br/>已读取本地缓存", YL.static.version));
-      }, 1000);
-    });
     YL.init();
     return;
   } else if (load === YL.static.localStorageName) {
@@ -27,11 +22,6 @@ YL.onLoad(function () {
   Yuri2.loadContentFromUrl(save, 'GET', function (err, text) {
     if (!err) {
       var data = JSON.parse(text);
-      YL.onReady(function () {
-        setTimeout(function () {
-          YL.msg("欢迎访问" + YL.static.softwareName, Yuri2.template("当前版本:${0}<br/>已读取文件数据 ${1}", YL.static.version, save));
-        }, 1000);
-      });
       YL.init(data);
     } else {
       alert('YLUI读取配置错误，初始化失败');
