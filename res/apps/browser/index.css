@@ -1,0 +1,100 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(to left top,#4CAF50, #2196F3);
+}
+.clear{
+    clear: both;}
+#app{
+    width:80%;
+    max-width: 720px;
+    height:80%;
+    position: absolute;
+    top:50%;
+    left:50%;
+    border-radius: 5px;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform:translate(-50%,-50%);
+}
+#url-box,#btn-go{
+    color: white;
+    height: 40px;
+    font-size: 16px;
+    line-height: 40px;
+    float: left;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.54);
+}
+#url-box{
+    width: 60%;
+    outline: none;
+    border-radius: 8px 0 0 8px;
+    margin-left: calc(20% - 2em);
+}
+#btn-go{
+    width: 3em;
+    text-align: center;
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+#btn-go:hover {
+    background-color: rgba(255, 255, 255, 0.29);
+}
+#url-ipt{
+    border: none;
+    background-color: transparent;
+    color: inherit;outline: none;
+    padding: 0 1.5em;
+    width: calc(100% - 3em);
+}
+#history-box{
+    list-style: none;
+    color: white;
+    padding-left: 0;
+    margin-top: 6em;
+    max-height: 70%;
+    overflow: auto;
+    padding-right: 2em;
+}
+#history-box li{
+    line-height: 40px;
+    height: 40px;
+}
+#history-box .text-one-line{
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+    height: 36px;
+    line-height: 36px;
+    overflow: hidden;
+    min-width: 0;
+}
+#history-box .left,#history-box .right{
+    height: inherit;
+    line-height: inherit;
+    color: rgba(255, 255, 255, 0.53);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+#history-box .left{
+    width: calc(90% - 12em);
+    float: left;
+
+}
+#history-box .left:hover {
+    text-decoration: underline;
+    color: rgba(255, 255, 255, 0.8);
+}
+#history-box .right{
+    width: 12em;
+    float: right;
+    text-align: right;
+}
+#history-box .right:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
