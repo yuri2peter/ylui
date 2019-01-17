@@ -26,7 +26,6 @@
     overflow: hidden;
     transition: left 0.3s;
     break-inside: avoid;
-    /*margin-bottom: 2em;*/
 }
 #yl .tiles>.title{
     color: white;
@@ -63,6 +62,9 @@
     background: rgba(105, 120, 135, 0.52);
 }
 
+#yl .tiles .vue-grid-item:hover .tile{
+    animation-fill-mode: backwards ;
+}
 #yl .tiles .vue-grid-item .tile{
     width: 100%;
     height: 100%;
