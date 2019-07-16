@@ -8,7 +8,7 @@
     "url": "https://github.com/yuri2peter/ylui"
   },
   "scripts": {
-    "start": "http-server"
+    "start": "serve -s ."
   },
   "window": {
     "title": "YLUI",
@@ -31,7 +31,8 @@
     "java": false,
     "page-cache": false
   },
-  "devDependencies": {
-    "http-server": "^0.11.1"
+  "devDependencies": {},
+  "dependencies": {
+    "serve": "^11.1.0"
   }
 }
