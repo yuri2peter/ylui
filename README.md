@@ -22,11 +22,11 @@ YLUI是一款纯前端框架，是对WEB桌面UI的一个大胆尝试。
 在项目目录输入命令：
 
 ```
-npm i
+npm ci
 npm start
 ```
 
-根据提示访问对应网址。
+访问网址，默认：http://localhost:5000
 
 #### 借助web服务环境
 
