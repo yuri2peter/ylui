@@ -245,39 +245,6 @@
       "customTile": "",
       "urlRandomToken": true
     },
-    "yl-server": {
-      "addressBar": false,
-      "autoRun": 1,
-      "background": false,
-      "badge": 0,
-      "desc": "YLUI官方后台服务",
-      "icon": {
-        "type": "fa",
-        "content": "yoast",
-        "bg": "#6b96cf"
-      },
-      "openMode": "min",
-      "plugin": true,
-      "position": {
-        "autoOffset": false,
-        "left": false,
-        "top": false,
-        "x": "4",
-        "y": "4"
-      },
-      "version": "1.0.0",
-      "poweredBy": "Yuri2",
-      "resizable": true,
-      "single": true,
-      "size": {
-        "height": "80",
-        "width": "160"
-      },
-      "title": "YLUI官方后台服务",
-      "url": "https://server.ylui.yuri2.cn",
-      "customTile": "",
-      "urlRandomToken": true
-    },
     "ylui-documents": {
       "addressBar": false,
       "autoRun": 0,
