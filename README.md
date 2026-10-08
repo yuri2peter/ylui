@@ -1,6 +1,6 @@
 # YLUI
 
-![1.png](https://s2.ax1x.com/2019/01/31/k1MVLd.png)
+![1.png](https://ylui.yuri2.cn/images/work_2.png)
 
 YLUI 是一款纯前端框架，是对 WEB 桌面 UI 的一个大胆尝试。
 
